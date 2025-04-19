@@ -1,0 +1,10 @@
+@media (max-width: 576px) {
+    .login-card {
+        margin: 15px;
+        border-radius: 12px;
+    }
+
+    .login-logo {
+        height: 50px;
+    }
+}
