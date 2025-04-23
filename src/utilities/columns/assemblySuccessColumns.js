@@ -22,11 +22,11 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => 
     {
         title: t('technician'),
         key: t('technician'),
-        sorter: (a, b) => a?.technician.localeCompare(b.technician),
+        sorter: (a, b) => a?.technician?.name.localeCompare(b?.technician?.name),
         render: (a) => {
             return (
                 <div>
-                    <div><span>{a?.technician}</span></div>
+                    <div><span>{a?.technician?.name} {a?.technician?.surname}</span></div>
                     <div><small className='color4'>{new Date(a.date).toLocaleDateString("tr-TR")}</small></div>
                 </div>
             )

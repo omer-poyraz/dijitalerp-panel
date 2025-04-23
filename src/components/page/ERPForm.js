@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PiFeather } from "react-icons/pi";
-import { Button, Col, Form, Input, Modal, ModalBody, ModalHeader, Row, Badge, ModalFooter } from 'reactstrap';
-import { Switch } from 'antd';
+import { Button, Col, Form, Input, Modal, ModalBody, ModalHeader, Row, ModalFooter } from 'reactstrap';
+import { Switch, Select } from 'antd';
 
 const ERPForm = ({ modal, setModal, setFormData, formData, handleSubmit, formValues }) => {
     const { t } = useTranslation();
@@ -25,27 +25,6 @@ const ERPForm = ({ modal, setModal, setFormData, formData, handleSubmit, formVal
         }
     };
 
-    const removeFile = (idx) => {
-        const updatedFiles = [...formData.file];
-        updatedFiles.splice(idx, 1);
-        setFormData({ ...formData, file: updatedFiles });
-    };
-
-    const getFileName = (file) => {
-        if (!file) return 'Dosya';
-
-        if (file instanceof File) return file.name;
-
-        if (typeof file === 'string') {
-            const parts = file.split(/[\/\\]/);
-            return parts[parts.length - 1];
-        }
-
-        if (typeof file === 'object' && file.name) return file.name;
-
-        return 'Dosya';
-    };
-
     const formatDateForInput = (dateValue) => {
         if (!dateValue) return '';
         if (typeof dateValue === 'string' && dateValue.match(/^\d{4}-\d{2}-\d{2}$/)) {
@@ -54,6 +33,13 @@ const ERPForm = ({ modal, setModal, setFormData, formData, handleSubmit, formVal
         const date = dateValue instanceof Date ? dateValue : new Date(dateValue);
         if (isNaN(date.getTime())) return '';
         return date.toISOString().split('T')[0];
+    };
+
+    const handleSelectChange = (value, key) => {
+        setFormData({
+            ...formData,
+            [key]: value
+        });
     };
 
     return (
@@ -67,7 +53,7 @@ const ERPForm = ({ modal, setModal, setFormData, formData, handleSubmit, formVal
                                 <Col key={index} md={item.col} className='mb-3'>
                                     <div className='form-item'>
                                         <div className={item.type === "switch" ? "w-100 text-center" : ""}><label>{item.label}</label></div>
-                                        {item.type !== "file" && item.type !== "switch" ? <PiFeather size={20} className='color4' /> : null}
+                                        {item.type !== "file" && item.type !== "switch" && item.type !== "select" ? <PiFeather size={20} className='color4' /> : null}
 
                                         {item.type === 'file' ? (
                                             <div>
@@ -78,27 +64,6 @@ const ERPForm = ({ modal, setModal, setFormData, formData, handleSubmit, formVal
                                                     type="file"
                                                     onChange={handleFileChange}
                                                 />
-
-                                                {formData.file && formData.file.length > 0 && (
-                                                    <div className="selected-files mt-2">
-                                                        <small className="text-muted">{t('selected_files') || 'Seçilen Dosyalar'}:</small>
-                                                        <div className="d-flex flex-wrap gap-2 mt-1">
-                                                            {formData.file.map((file, idx) => (
-                                                                <Badge key={idx} color="primary" className="p-2">
-                                                                    {getFileName(file)}
-                                                                    <Button
-                                                                        close
-                                                                        className="ms-2"
-                                                                        onClick={(e) => {
-                                                                            e.preventDefault();
-                                                                            removeFile(idx);
-                                                                        }}
-                                                                    />
-                                                                </Badge>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                )}
                                             </div>
                                         ) : item.type === 'date' ? (
                                             <Input
@@ -113,6 +78,18 @@ const ERPForm = ({ modal, setModal, setFormData, formData, handleSubmit, formVal
                                                     });
                                                 }}
                                                 type="date"
+                                            />
+                                        ) : item.type === 'select' ? (
+                                            <Select
+                                                id={item.key}
+                                                value={formData[item.key]}
+                                                onChange={(value) => handleSelectChange(value, item.key)}
+                                                style={{ width: '100%' }}
+                                                placeholder={t('select_option')}
+                                                options={item.options || []}
+                                                allowClear
+                                                showSearch
+                                                optionFilterProp="label"
                                             />
                                         ) : item.type === 'switch' ? (
                                             <div className="d-flex justify-content-center align-items-center mt-2">

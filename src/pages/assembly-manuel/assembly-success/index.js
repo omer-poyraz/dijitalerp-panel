@@ -13,6 +13,7 @@ import { fetchAssemblySuccessDelete } from '../../../redux/slices/assemblySucces
 import { fetchAssemblySuccessCreate } from '../../../redux/slices/assemblySuccessCreateSlice'
 import { fetchAssemblySuccessUpdate } from '../../../redux/slices/assemblySuccessUpdateSlice'
 import { columns } from '../../../utilities/columns/assemblySuccessColumns'
+import { fetchEmployeeGetAll } from '../../../redux/slices/employeeGetAllSlice'
 
 const AssemblySuccessPage = () => {
     const { t } = useTranslation()
@@ -26,7 +27,7 @@ const AssemblySuccessPage = () => {
     const dispatch = useDispatch()
     const [formData, setFormData] = useState({ id: 0, file: [] });
     const [formValues] = useState([
-        { label: t("technician"), col: 6, key: "technician", type: "text" },
+        { label: t("technician"), col: 6, key: "technicianID", type: "select" },
         { label: t("part_code"), col: 6, key: "partCode", type: "text" },
         { label: t("approval"), col: 12, key: "approval", type: "text" },
         { label: t("pending_quantity"), col: 4, key: "pendingQuantity", type: "number" },
@@ -41,6 +42,13 @@ const AssemblySuccessPage = () => {
         setLoading(true)
         await dispatch(fetchAssemblyManualGet({ id: id }))
         await dispatch(fetchAssemblySuccessGetAllByManual({ id: id }))
+        var data = await dispatch(fetchEmployeeGetAll())
+        if (data.payload) {
+            formValues[0].options = data.payload.map((item) => ({
+                label: `${item.name} ${item.surname}`,
+                value: item.id
+            }));
+        }
         setLoading(false)
     }
 
@@ -55,7 +63,7 @@ const AssemblySuccessPage = () => {
             if (selectedData) {
                 setFormData({
                     id: selectedData.id,
-                    technician: selectedData.technician,
+                    technicianID: selectedData.technicianID,
                     partCode: selectedData.partCode,
                     approval: selectedData.approval,
                     pendingQuantity: selectedData.pendingQuantity,

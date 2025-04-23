@@ -8,13 +8,13 @@ export const fetchAssemblySuccessCreate = createAsyncThunk(
 
         const data = {
             "description": formData.description,
-            "technician": formData.technician,
+            "technicianID": formData.technicianID,
             "partCode": formData.partCode,
             "status": Boolean(formData.status),
             "approval": formData.approval,
             "pendingQuantity": parseInt(formData.pendingQuantity),
             "qualityDescription": formData.qualityDescription,
-            "date": formData.date,
+            "date": new Date(formData.date).toISOString(),
             "assemblyManuelID": parseInt(manualId),
             "userId": userId,
         }

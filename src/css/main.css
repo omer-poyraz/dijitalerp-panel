@@ -51,7 +51,22 @@ h6 {
 .form-item svg {
     position: absolute;
     top: 34px;
-    left: 10px;
+    left: 12px;
+}
+
+:where(.css-dev-only-do-not-override-1261szd).ant-select .ant-select-arrow svg {
+    display: inline-block;
+    top: 2px;
+    left: -12px;
+}
+
+.anticon svg {
+    top: 1px !important;
+    left: -8px !important;
+}
+
+.ant-select-show-search:where(.css-dev-only-do-not-override-1261szd).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    height: 37px;
 }
 
 .form-item input,

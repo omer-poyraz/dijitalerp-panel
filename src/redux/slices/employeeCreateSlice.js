@@ -8,7 +8,16 @@ export const fetchEmployeeCreate = createAsyncThunk(
 
         const data = new FormData();
         if (formData.file) {
-            data.append("file", formData.file);
+            if (Array.isArray(formData.file)) {
+                formData.file.forEach(file => {
+                    if (file instanceof File) {
+                        data.append("file", file);
+                    }
+                });
+            }
+            else if (formData.file instanceof File) {
+                data.append("file", formData.file);
+            }
         }
         data.append("Name", formData.name)
         data.append("Surname", formData.surname)

@@ -13,6 +13,7 @@ import ERPForm from '../../../components/page/ERPForm'
 import { fetchAssemblyFailureCreate } from '../../../redux/slices/assemblyFailureCreateSlice'
 import { fetchAssemblyFailureUpdate } from '../../../redux/slices/assemblyFailureUpdateSlice'
 import Alerts from '../../../components/page/Alert'
+import { fetchEmployeeGetAll } from '../../../redux/slices/employeeGetAllSlice'
 
 const AssemblyFailurePage = () => {
     const { t } = useTranslation()
@@ -27,7 +28,7 @@ const AssemblyFailurePage = () => {
     const [formData, setFormData] = useState({ id: 0, file: [] });
     const [formValues] = useState([
         { label: t("inappropriateness"), col: 12, key: "inappropriateness", type: "text" },
-        { label: t("technician"), col: 6, key: "technician", type: "text" },
+        { label: t("technician"), col: 6, key: "technicianID", type: "select" },
         { label: t("part_code"), col: 6, key: "partCode", type: "text" },
         { label: t("pending_quantity"), col: 4, key: "pendingQuantity", type: "text" },
         { label: t("date"), col: 4, key: "date", type: "date" },
@@ -40,6 +41,13 @@ const AssemblyFailurePage = () => {
         setLoading(true)
         await dispatch(fetchAssemblyManualGet({ id: id }))
         await dispatch(fetchAssemblyFailureGetAllByManual({ id: id }))
+        var data = await dispatch(fetchEmployeeGetAll())
+        if (data.payload) {
+            formValues[1].options = data.payload.map((item) => ({
+                label: `${item.name} ${item.surname}`,
+                value: item.id
+            }));
+        }
         setLoading(false)
     }
 
@@ -55,7 +63,7 @@ const AssemblyFailurePage = () => {
                 setFormData({
                     id: selectedData.id,
                     inappropriateness: selectedData.inappropriateness,
-                    technician: selectedData.technician,
+                    technicianID: selectedData.technicianID,
                     partCode: selectedData.partCode,
                     pendingQuantity: selectedData.pendingQuantity,
                     date: selectedData.date,

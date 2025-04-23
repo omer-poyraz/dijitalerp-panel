@@ -13,6 +13,7 @@ import { fetchAssemblyManualDelete } from '../../redux/slices/assemblyManualDele
 import { fetchAssemblyManualGet } from '../../redux/slices/assemblyManualGetSlice';
 import { fetchAssemblyManualUpdate } from '../../redux/slices/assemblyManualUpdateSlice';
 import { useNavigate } from 'react-router-dom';
+import { fetchEmployeeGetAll } from '../../redux/slices/employeeGetAllSlice';
 
 const AssemblyManuelPage = () => {
     const { t } = useTranslation();
@@ -27,8 +28,8 @@ const AssemblyManuelPage = () => {
         { label: t("files"), col: 6, key: "file", type: "file" },
         { label: t("project_name"), col: 6, key: "projectName", type: "text" },
         { label: t("part_code"), col: 6, key: "partCode", type: "text" },
-        { label: t("responible"), col: 6, key: "responible", type: "text" },
-        { label: t("person_in_charge"), col: 6, key: "personInCharge", type: "text" },
+        { label: t("responible"), col: 6, key: "responibleID", type: "select", },
+        { label: t("person_in_charge"), col: 6, key: "personInChargeID", type: "select" },
         { label: t("serial_number"), col: 6, key: "serialNumber", type: "text" },
         { label: t("production_quantity"), col: 6, key: "productionQuantity", type: "number" },
         { label: t("time"), col: 6, key: "time", type: "number" },
@@ -43,6 +44,17 @@ const AssemblyManuelPage = () => {
         try {
             setLoading(true);
             await dispatch(fetchAssemblyManualGetAll());
+            var data = await dispatch(fetchEmployeeGetAll())
+            if (data.payload) {
+                formValues[3].options = data.payload.map((item) => ({
+                    label: `${item.name} ${item.surname}`,
+                    value: item.id
+                }));
+                formValues[4].options = data.payload.map((item) => ({
+                    label: `${item.name} ${item.surname}`,
+                    value: item.id
+                }));
+            }
             setLoading(false);
         } catch (err) {
             setLoading(false);
@@ -75,8 +87,8 @@ const AssemblyManuelPage = () => {
                     file: data.payload.file,
                     projectName: data.payload.projectName,
                     partCode: data.payload.partCode,
-                    responible: data.payload.responible,
-                    personInCharge: data.payload.personInCharge,
+                    responibleID: data.payload.responibleID,
+                    personInChargeID: data.payload.personInChargeID,
                     serialNumber: data.payload.serialNumber,
                     productionQuantity: data.payload.productionQuantity,
                     time: data.payload.time,

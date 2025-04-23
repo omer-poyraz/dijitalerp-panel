@@ -1,10 +1,9 @@
 import { Popconfirm } from 'antd';
 import { BiEdit } from 'react-icons/bi';
 import { BsClock } from 'react-icons/bs';
-import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
-import { MdOutlineErrorOutline } from 'react-icons/md';
 import { PiClockUser } from 'react-icons/pi';
 import { TbTrash } from 'react-icons/tb';
+import { URL } from '../../api';
 
 export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => [
     {
