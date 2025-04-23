@@ -29,6 +29,7 @@
     "quality_description": "Quality Description",
     "production_quantity": "Production Quantity",
     "approval": "Approval",
+    "image": "Image",
     "process": "Process",
     "time": "Time",
     "date": "Date",
@@ -80,6 +81,13 @@
     "no_results_found": "No results matching your search",
     "loading": "Loading...",
     "username": "Username",
+    "field":"Field",
+    "name": "Name",
+    "surname": "Surname",
+    "address": "Address",
+    "phone": "Phone",
+    "birthday": "Birthday",
+    "startday": "Start Date",
     "search_records": "Search records...",
     "search_manuals": "Search assembly manuals...",
     "select_date": "Select date",
@@ -103,5 +111,8 @@
     "reports": "Reports",
     "settings": "Settings",
     "project_note_desc": "You can follow the list of those who left notes on the project here.",
-    "project_error_desc": "You can follow the list of those who failed the project here."
+    "project_error_desc": "You can follow the list of those who failed the project here.",
+    "employee_management": "Employee Management",
+    "employee_management_desc": "Manage your employees and their roles",
+    "employee": "Employee"
 }

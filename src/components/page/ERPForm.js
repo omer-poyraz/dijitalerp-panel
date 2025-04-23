@@ -8,17 +8,42 @@ const ERPForm = ({ modal, setModal, setFormData, formData, handleSubmit, formVal
     const { t } = useTranslation();
 
     useEffect(() => {
-        if (modal && (!formData.file || !Array.isArray(formData.file))) {
-            setFormData(prev => ({ ...prev, file: [] }));
+        if (modal) {
+            if (!formData.file) {
+                setFormData(prev => ({ ...prev, file: [] }));
+            } else if (!Array.isArray(formData.file)) {
+                setFormData(prev => ({ ...prev, file: [formData.file] }));
+            }
         }
     }, [modal, formData, setFormData]);
 
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
         if (files.length > 0) {
-            const existingFiles = Array.isArray(formData.file) ? formData.file : [];
+            const existingFiles = Array.isArray(formData.file) ? formData.file : (formData.file ? [formData.file] : []);
             setFormData({ ...formData, file: [...existingFiles, ...files] });
         }
+    };
+
+    const removeFile = (idx) => {
+        const updatedFiles = [...formData.file];
+        updatedFiles.splice(idx, 1);
+        setFormData({ ...formData, file: updatedFiles });
+    };
+
+    const getFileName = (file) => {
+        if (!file) return 'Dosya';
+
+        if (file instanceof File) return file.name;
+
+        if (typeof file === 'string') {
+            const parts = file.split(/[\/\\]/);
+            return parts[parts.length - 1];
+        }
+
+        if (typeof file === 'object' && file.name) return file.name;
+
+        return 'Dosya';
     };
 
     const formatDateForInput = (dateValue) => {
@@ -45,13 +70,36 @@ const ERPForm = ({ modal, setModal, setFormData, formData, handleSubmit, formVal
                                         {item.type !== "file" && item.type !== "switch" ? <PiFeather size={20} className='color4' /> : null}
 
                                         {item.type === 'file' ? (
-                                            <Input
-                                                id={item.key}
-                                                name={item.key}
-                                                multiple={true}
-                                                type="file"
-                                                onChange={handleFileChange}
-                                            />
+                                            <div>
+                                                <Input
+                                                    id={item.key}
+                                                    name={item.key}
+                                                    multiple={true}
+                                                    type="file"
+                                                    onChange={handleFileChange}
+                                                />
+
+                                                {formData.file && formData.file.length > 0 && (
+                                                    <div className="selected-files mt-2">
+                                                        <small className="text-muted">{t('selected_files') || 'Seçilen Dosyalar'}:</small>
+                                                        <div className="d-flex flex-wrap gap-2 mt-1">
+                                                            {formData.file.map((file, idx) => (
+                                                                <Badge key={idx} color="primary" className="p-2">
+                                                                    {getFileName(file)}
+                                                                    <Button
+                                                                        close
+                                                                        className="ms-2"
+                                                                        onClick={(e) => {
+                                                                            e.preventDefault();
+                                                                            removeFile(idx);
+                                                                        }}
+                                                                    />
+                                                                </Badge>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
                                         ) : item.type === 'date' ? (
                                             <Input
                                                 id={item.key}

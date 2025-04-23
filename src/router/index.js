@@ -8,6 +8,7 @@ import ProductPage from '../pages/product';
 import AssemblySuccessPage from '../pages/assembly-manuel/assembly-success';
 import AssemblyFailurePage from '../pages/assembly-manuel/assembly-failure';
 import AssemblyNotePage from '../pages/assembly-manuel/assembly-note';
+import EmployeePage from '../pages/employee';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -34,6 +35,7 @@ const AnimatedRoutes = () => {
                 <Route path='/assembly-success/:id' element={isAuth ? <AssemblySuccessPage /> : <LoginPage />} />
                 <Route path='/assembly-note/:id' element={isAuth ? <AssemblyNotePage /> : <LoginPage />} />
                 <Route path='/assembly-failure/:id' element={isAuth ? <AssemblyFailurePage /> : <LoginPage />} />
+                <Route path='/employee' element={isAuth ? <EmployeePage /> : <LoginPage />} />
                 <Route path='/login' element={isAuth ? <HomePage /> : <LoginPage />} />
                 <Route path='/product' element={isAuth ? <ProductPage /> : <LoginPage />} />
                 <Route path='/*' element={isAuth ? <HomePage /> : <LoginPage />} />

@@ -20,8 +20,8 @@ const AssemblyManuelPage = () => {
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [selectedItem, setSelectedItem] = useState(null);
     const [success, setSuccess] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
     const [formData, setFormData] = useState({ id: 0, file: [] });
     const [formValues] = useState([
         { label: t("files"), col: 6, key: "file", type: "file" },

@@ -21,6 +21,7 @@
     "project_name": "Proje Adı",
     "make_user": "Değişiklik Yapan",
     "content_delete_desc": "Bu öğeyi silmek istediğinize emin misiniz?",
+    "image": "Resim",
     "yes": "Evet",
     "process": "İşlem",
     "no": "Hayır",
@@ -36,6 +37,12 @@
     "technician_date": "Teknisyen Tarihi",
     "user_id": "Kullanıcı ID",
     "username": "Kullanıcı Adı",
+    "name": "Ad",
+    "surname": "Soyad",
+    "address": "Adres",
+    "phone": "Telefon",
+    "birthday": "Doğum Günü",
+    "startday": "Başlangıç Tarihi",
     "files": "Dosyalar",
     "enter_project_name": "Proje adını girin",
     "enter_part_code": "Parça kodunu girin",
@@ -61,6 +68,7 @@
     "deleting": "Siliniyor...",
     "confirm_delete": "Silmeyi Onayla",
     "delete_confirmation_message": "Bu öğeyi silmek istediğinize emin misiniz? Bu işlem geri alınamaz.",
+    "field":"Alan",
     "field_required": "Bu alan zorunludur",
     "must_be_number": "Bu alan bir sayı olmalıdır",
     "add_success": "Öğe başarıyla eklendi",
@@ -103,5 +111,8 @@
     "account_settings": "Account Settings",
     "project_success_desc": "Projede başarılı olanların listesini buradan takip edebilirsiniz.",
     "project_note_desc": "Projede not bırakılanların listesini buradan takip edebilirsiniz.",
-    "project_error_desc": "Projede başarısız olanların listesini buradan takip edebilirsiniz."
+    "project_error_desc": "Projede başarısız olanların listesini buradan takip edebilirsiniz.",
+    "employee_management": "Personel Yönetimi",
+    "employee_management_desc": "Personel yönetimi ve izleme işlemlerini buradan yapabilirsiniz.",
+    "employee": "Personel"
 }

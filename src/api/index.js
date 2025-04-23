@@ -1,4 +1,4 @@
-export const URL = 'https://localhost:7289/api';
+export const URL = 'http://192.168.1.6:5254/api';
 
 // AUTHENTICATION
 export const LOGIN_SERVICE = `${URL}/Authentication/Login`;
@@ -34,6 +34,13 @@ export const ASSEMBLY_NOTE_GET = `${URL}/AssemblyNote/Get`;
 export const ASSEMBLY_NOTE_CREATE = `${URL}/AssemblyNote/Create`;
 export const ASSEMBLY_NOTE_UPDATE = `${URL}/AssemblyNote/Update`;
 export const ASSEMBLY_NOTE_DELETE = `${URL}/AssemblyNote/Delete`;
+
+// EMPLOYEE
+export const EMPLOYEE_GETALL = `${URL}/Employee/GetAll`;
+export const EMPLOYEE_GET = `${URL}/Employee/Get`;
+export const EMPLOYEE_CREATE = `${URL}/Employee/Create`;
+export const EMPLOYEE_UPDATE = `${URL}/Employee/Update`;
+export const EMPLOYEE_DELETE = `${URL}/Employee/Delete`;
 
 // USER
 export const RESET_PASSWORD_SERVICE = `${URL}/User/ResetPassword`;

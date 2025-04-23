@@ -109,7 +109,7 @@ h6 {
     height: 40px;
     max-height: 40px;
     width: auto;
-    filter: drop-shadow(2px 4px 6px #1266ad);
+    filter: invert(1);
 }
 
 .nav-menu {

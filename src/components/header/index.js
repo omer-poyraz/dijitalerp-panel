@@ -76,10 +76,10 @@ const Header = () => {
 
     const menuItems = [
         { path: "/assembly-manual", label: t("assembly_manual") },
-        { path: "/product", label: t("product"), hasSubmenu: true },
+        { path: "/product", label: t("product") },
         { path: "/customers", label: t("customers") },
         { path: "/orders", label: t("orders") },
-        { path: "/reports", label: t("reports") },
+        { path: "/employee", label: t("employee") },
         { path: "/settings", label: t("settings") },
     ];
 
