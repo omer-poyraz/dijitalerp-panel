@@ -9,6 +9,10 @@ import AssemblySuccessPage from '../pages/assembly-manuel/assembly-success';
 import AssemblyFailurePage from '../pages/assembly-manuel/assembly-failure';
 import AssemblyNotePage from '../pages/assembly-manuel/assembly-note';
 import EmployeePage from '../pages/employee';
+import TechnicalDrawingPage from '../pages/technical-drawing';
+import TechnicalDrawingSuccessPage from '../pages/technical-drawing/technical-drawing-success';
+import TechnicalDrawingNotePage from '../pages/technical-drawing/technical-drawing-note';
+import TechnicalDrawingFailurePage from '../pages/technical-drawing/technical-drawing-failure';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -38,6 +42,10 @@ const AnimatedRoutes = () => {
                 <Route path='/employee' element={isAuth ? <EmployeePage /> : <LoginPage />} />
                 <Route path='/login' element={isAuth ? <HomePage /> : <LoginPage />} />
                 <Route path='/product' element={isAuth ? <ProductPage /> : <LoginPage />} />
+                <Route path='/technical-drawing' element={isAuth ? <TechnicalDrawingPage /> : <LoginPage />} />
+                <Route path='/technical-drawing-success/:id' element={isAuth ? <TechnicalDrawingSuccessPage /> : <LoginPage />} />
+                <Route path='/technical-drawing-note/:id' element={isAuth ? <TechnicalDrawingNotePage /> : <LoginPage />} />
+                <Route path='/technical-drawing-failure/:id' element={isAuth ? <TechnicalDrawingFailurePage /> : <LoginPage />} />
                 <Route path='/*' element={isAuth ? <HomePage /> : <LoginPage />} />
             </Routes>
         </AnimatePresence>

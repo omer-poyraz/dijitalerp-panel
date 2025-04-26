@@ -120,11 +120,27 @@ h6 {
     z-index: 2;
 }
 
+.logo-container a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-container a img:first-child {
+    height: 40px;
+}
+
+.logo-container a img:last-child {
+    height: 40px;
+    margin-left: 5px;
+    margin-top: -10px;
+}
+
 .header-logo {
     height: 40px;
     max-height: 40px;
     width: auto;
-    filter: invert(1);
 }
 
 .nav-menu {
@@ -383,6 +399,22 @@ h6 {
 
 
 /* login */
+
+.login-branding {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.login-branding img:first-child {
+    height: 60px;
+}
+.login-branding img:last-child {
+    height: 60px;
+    margin-left: 5px;
+    margin-top: -10px;
+}
 
 .modern-login-page {
     min-height: 100vh;

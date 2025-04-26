@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Card, CardBody, Form, FormGroup, Input, Button, InputGroup, InputGroupText } from 'reactstrap';
 import { Checkbox, Divider } from 'antd';
 import { UserOutlined, LockOutlined, EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import logo from '../../images/logo.svg';
+import logo from '../../images/logo2.png';
+import logo2 from '../../images/logo3.png';
 import { useTranslation } from 'react-i18next';
 import LoginComponent from './LoginComponent';
 
@@ -46,7 +47,8 @@ const LoginPage = () => {
                 <Row className="justify-content-center">
                     <Col md={10} lg={8} xl={6}>
                         <div className="login-branding text-center">
-                            <img src={logo} alt="Company Logo" className="login-logo" />
+                            <img src={logo2} alt="" className="cp" />
+                            <img src={logo} alt="Dijital ERP" className="cp" />
                         </div>
 
                         <Card className="modern-login-card">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import logo from '../../images/logo.svg';
+import logo from '../../images/logo2.png';
+import logo2 from '../../images/logo3.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaBars, FaTimes, FaUser, FaCog, FaSignOutAlt, FaChevronDown } from 'react-icons/fa';
@@ -78,7 +79,7 @@ const Header = () => {
         { path: "/assembly-manual", label: t("assembly_manual") },
         { path: "/product", label: t("product") },
         { path: "/customers", label: t("customers") },
-        { path: "/orders", label: t("orders") },
+        { path: "/technical-drawing", label: t("technical_drawing") },
         { path: "/employee", label: t("employee") },
         { path: "/settings", label: t("settings") },
     ];
@@ -88,7 +89,8 @@ const Header = () => {
             <div className="header-container">
                 <div className="logo-container">
                     <Link to="/" onClick={closeMenu}>
-                        <img src={logo} alt="Dijital ERP" className="header-logo cp" />
+                        <img src={logo2} alt="" className="cp" />
+                        <img src={logo} alt="Dijital ERP" className="cp" />
                     </Link>
                 </div>
 
