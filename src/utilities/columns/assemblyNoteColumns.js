@@ -21,13 +21,13 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => 
         }
     },
     {
-        title: t('note'),
-        key: t('note'),
-        sorter: (a, b) => a?.note.localeCompare(b.note),
+        title: t('description'),
+        key: t('description'),
+        sorter: (a, b) => a?.description.localeCompare(b.description),
         render: (a) => {
             return (
                 <div>
-                    <div><span>{Split(a?.note, 50)}</span></div>
+                    <div><span>{Split(a?.description, 50)}</span></div>
                 </div>
             )
         }

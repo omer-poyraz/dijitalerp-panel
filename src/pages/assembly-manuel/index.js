@@ -92,8 +92,8 @@ const AssemblyManuelPage = () => {
                     serialNumber: data.payload.serialNumber,
                     productionQuantity: data.payload.productionQuantity,
                     time: data.payload.time,
-                    date: data.payload.tarih,
-                    technicianDate: data.payload.teknisyenTarih,
+                    date: data.payload.date,
+                    technicianDate: data.payload.technicianDate,
                     description: data.payload.description
                 });
             }

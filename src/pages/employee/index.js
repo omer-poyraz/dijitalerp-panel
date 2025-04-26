@@ -63,6 +63,7 @@ const EmployeePage = () => {
                 setModal(false)
                 setTimeout(() => setSuccess(null), 5000);
             }
+            setFormData({ id: 0, file: null })
             setLoading(false)
         } catch (error) {
             setLoading(false)

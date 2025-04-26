@@ -1,10 +1,59 @@
 import axios from "axios"
-import { ASSEMBLY_FAILURE_CREATE, ASSEMBLY_FAILURE_DELETE, ASSEMBLY_FAILURE_GET, ASSEMBLY_FAILURE_GETALL, ASSEMBLY_FAILURE_GETALLBYMANUAL, ASSEMBLY_FAILURE_UPDATE, ASSEMBLY_MANUAL_CREATE, ASSEMBLY_MANUAL_DELETE, ASSEMBLY_MANUAL_GET, ASSEMBLY_MANUAL_GETALL, ASSEMBLY_MANUAL_UPDATE, ASSEMBLY_NOTE_CREATE, ASSEMBLY_NOTE_DELETE, ASSEMBLY_NOTE_GET, ASSEMBLY_NOTE_GETALL, ASSEMBLY_NOTE_GETALLBYMANUAL, ASSEMBLY_NOTE_UPDATE, ASSEMBLY_SUCCESS_CREATE, ASSEMBLY_SUCCESS_DELETE, ASSEMBLY_SUCCESS_GETALL, ASSEMBLY_SUCCESS_GETALLBYMANUAL, ASSEMBLY_SUCCESS_UPDATE, EMPLOYEE_CREATE, EMPLOYEE_DELETE, EMPLOYEE_GET, EMPLOYEE_GETALL, EMPLOYEE_UPDATE, LOGIN_SERVICE, RESET_PASSWORD_SERVICE } from "../api"
+import { ASSEMBLY_FAILURE_CREATE, ASSEMBLY_FAILURE_DELETE, ASSEMBLY_FAILURE_GET, ASSEMBLY_FAILURE_GETALL, ASSEMBLY_FAILURE_GETALLBYMANUAL, ASSEMBLY_FAILURE_UPDATE, ASSEMBLY_MANUAL_CREATE, ASSEMBLY_MANUAL_DELETE, ASSEMBLY_MANUAL_GET, ASSEMBLY_MANUAL_GETALL, ASSEMBLY_MANUAL_UPDATE, ASSEMBLY_NOTE_CREATE, ASSEMBLY_NOTE_DELETE, ASSEMBLY_NOTE_GET, ASSEMBLY_NOTE_GETALL, ASSEMBLY_NOTE_GETALLBYMANUAL, ASSEMBLY_NOTE_UPDATE, ASSEMBLY_SUCCESS_CREATE, ASSEMBLY_SUCCESS_DELETE, ASSEMBLY_SUCCESS_GETALL, ASSEMBLY_SUCCESS_GETALLBYMANUAL, ASSEMBLY_SUCCESS_UPDATE, EMPLOYEE_CREATE, EMPLOYEE_DELETE, EMPLOYEE_GET, EMPLOYEE_GETALL, EMPLOYEE_UPDATE, LOGIN_SERVICE, REFRESH_SERVICE, RESET_PASSWORD_SERVICE } from "../api"
 
 const token = localStorage.getItem("auth") === null ? null : JSON.parse(localStorage.getItem("auth")).accessToken
 const language = localStorage.getItem("lang") === null ? "tr" : localStorage.getItem("lang")
 const header = { headers: { "Authorization": `Bearer ${token}`, "Accept-Language": language } }
 const headerFormData = { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "multipart/form-data", "Accept-Language": language } }
+
+
+const refreshTokenIfNeeded = async () => {
+    const authData = localStorage.getItem('auth');
+    if (!authData) return;
+    const user = JSON.parse(authData);
+    const accessToken = user.accessToken;
+    const refreshToken = user.refreshToken;
+    const refreshTokenExpireTime = user.refreshTokenExpireTime;
+
+    const expireDate = new Date(refreshTokenExpireTime);
+    const now = new Date();
+    if (expireDate - now < 2 * 60 * 1000) {
+        try {
+            const res = await axios.post(REFRESH_SERVICE, {
+                accessToken,
+                refreshToken
+            });
+            if (res.data?.result) {
+                localStorage.setItem('auth', JSON.stringify({
+                    ...user,
+                    user: res.data.result.user,
+                    accessToken: res.data.result.accessToken,
+                    refreshToken: res.data.result.refreshToken,
+                    refreshTokenExpireTime: res.data.result.user.refreshTokenExpireTime
+                }));
+                token = res.data.result.accessToken;
+                header = { headers: { "Authorization": `Bearer ${token}` } };
+                headerFormData = { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "multipart/form-data" } };
+            }
+        } catch (err) {
+            console.log("Refresh token hatası:", err);
+        }
+    }
+};
+
+axios.interceptors.request.use(
+    async (config) => {
+        await refreshTokenIfNeeded();
+        const authData = localStorage.getItem('auth');
+        if (authData) {
+            const user = JSON.parse(authData);
+            config.headers["Authorization"] = `Bearer ${user.accessToken}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
 
 
 // AUTHENTICATION

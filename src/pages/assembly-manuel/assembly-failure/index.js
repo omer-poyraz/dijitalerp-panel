@@ -27,7 +27,7 @@ const AssemblyFailurePage = () => {
     const dispatch = useDispatch()
     const [formData, setFormData] = useState({ id: 0, file: [] });
     const [formValues] = useState([
-        { label: t("inappropriateness"), col: 12, key: "inappropriateness", type: "text" },
+        // { label: t("inappropriateness"), col: 12, key: "inappropriateness", type: "text" },
         { label: t("technician"), col: 6, key: "technicianID", type: "select" },
         { label: t("part_code"), col: 6, key: "partCode", type: "text" },
         { label: t("pending_quantity"), col: 4, key: "pendingQuantity", type: "text" },
@@ -43,7 +43,7 @@ const AssemblyFailurePage = () => {
         await dispatch(fetchAssemblyFailureGetAllByManual({ id: id }))
         var data = await dispatch(fetchEmployeeGetAll())
         if (data.payload) {
-            formValues[1].options = data.payload.map((item) => ({
+            formValues[0].options = data.payload.map((item) => ({
                 label: `${item.name} ${item.surname}`,
                 value: item.id
             }));

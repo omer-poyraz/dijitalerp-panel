@@ -44,7 +44,7 @@ const ERPForm = ({ modal, setModal, setFormData, formData, handleSubmit, formVal
 
     return (
         <Modal isOpen={modal} toggle={() => setModal(!modal)} size="lg" className="modal-dialog-centered">
-            <ModalHeader toggle={() => setModal(!modal)} tag="h5">{t('add_new')}</ModalHeader>
+            <ModalHeader toggle={() => setModal(!modal)} tag="h5">{formData.id !== 0 ? t("edit") : t('add_new')}</ModalHeader>
             <Form onSubmit={handleSubmit}>
                 <ModalBody className='overflow-y-auto'>
                     <Row>

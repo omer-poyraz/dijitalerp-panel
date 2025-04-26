@@ -24,9 +24,9 @@ const AssemblyNotePage = () => {
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
     const dispatch = useDispatch()
-    const [formData, setFormData] = useState({ id: 0, file: [] });
+    const [formData, setFormData] = useState({ id: 0, file: [], status: false });
     const [formValues] = useState([
-        { label: t("note"), col: 6, key: "note", type: "textarea" },
+        { label: t("part_code"), col: 6, key: "partCode", type: "text" },
         { label: t("description"), col: 6, key: "description", type: "textarea" },
         { label: t("status"), col: 4, key: "status", type: "switch" },
     ]);
@@ -67,6 +67,9 @@ const AssemblyNotePage = () => {
         setLoading(true);
         try {
             if (!selectedItem) {
+                if (formData.status === null || formData.status === undefined) {
+                    setFormData({ ...formData, status: false });
+                }
                 setLoading(true);
                 await dispatch(fetchAssemblyNoteCreate({ formData: formData, manualId: id }));
                 await getData();
