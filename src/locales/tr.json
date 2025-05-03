@@ -88,6 +88,8 @@
     "inappropriateness": "Uygunsuzluk",
     "technician": "Teknisyen",
     "operator": "Operatör",
+    "visual_notes": "Görsel Notlar",
+    "visual_notes_description": "Görsel notlarınızı bu sayfadan yönetin.",
     "password": "Şifre",
     "status": "Durum",
     "pending_quantity": "Bekleyen Miktar",

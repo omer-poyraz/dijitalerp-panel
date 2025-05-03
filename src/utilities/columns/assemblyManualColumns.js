@@ -6,6 +6,7 @@ import { PiClockUser } from 'react-icons/pi';
 import { TbTrash } from 'react-icons/tb';
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { MdOutlineErrorOutline, MdOutlineSpeakerNotes } from "react-icons/md";
+import { IoCameraOutline } from "react-icons/io5";
 
 export const columns = ({ t, setSelectedItem, modal, deleteData, setModal, navigation }) => [
     {
@@ -97,6 +98,12 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal, navig
                         className='text-info rounded border ml-2 p-2 cp'
                     >
                         <MdOutlineSpeakerNotes size={22} />
+                    </div>
+                    <div
+                        onClick={() => navigation(`/assembly-visual-note/${a?.id}`)}
+                        className='text-warning rounded border ml-2 p-2 cp'
+                    >
+                        <IoCameraOutline size={22} />
                     </div>
                     <div className='text-danger rounded border ml-2 rounded p-2 cp'>
                         <Popconfirm

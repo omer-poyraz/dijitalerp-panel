@@ -3,7 +3,7 @@ import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { PiPlus } from 'react-icons/pi'
 
-const Banner = ({ modal, setModal, title, description }) => {
+const Banner = ({ modal, setModal, title, description, isBtn }) => {
     const { t } = useTranslation()
 
     return (
@@ -13,7 +13,7 @@ const Banner = ({ modal, setModal, title, description }) => {
                 <small className="mt--5 d-block">{description}</small>
             </div>
             <div>
-                <Button onClick={() => setModal(!modal)}><PiPlus />{t("add_new")}</Button>
+                {!isBtn ? <Button onClick={() => setModal(!modal)}><PiPlus />{t("add_new")}</Button> : null}
             </div>
         </div>
     )

@@ -25,6 +25,10 @@ import assemblyNoteGetReducer from './slices/assemblyNoteGetSlice'
 import assemblyNoteCreateReducer from './slices/assemblyNoteCreateSlice'
 import assemblyNoteUpdateReducer from './slices/assemblyNoteUpdateSlice'
 import assemblyNoteDeleteReducer from './slices/assemblyNoteDeleteSlice'
+import assemblyVisualNoteCreateReducer from './slices/assemblyVisualNoteCreateSlice'
+import assemblyVisualNoteGetReducer from './slices/assemblyVisualNoteGetSlice'
+import assemblyVisualNoteGetAllByDrawingReducer from './slices/assemblyVisualNoteGetAllByDrawingSlice'
+import assemblyVisualNoteDeleteReducer from './slices/assemblyVisualNoteDeleteSlice'
 import employeeGetAllReducer from './slices/employeeGetAllSlice'
 import employeeGetReducer from './slices/employeeGetSlice'
 import employeeCreateReducer from './slices/employeeCreateSlice'
@@ -53,6 +57,10 @@ import technicalDrawingNoteGetReducer from './slices/technicalDrawingNoteGetSlic
 import technicalDrawingNoteCreateReducer from './slices/technicalDrawingNoteCreateSlice'
 import technicalDrawingNoteUpdateReducer from './slices/technicalDrawingNoteUpdateSlice'
 import technicalDrawingNoteDeleteReducer from './slices/technicalDrawingNoteDeleteSlice'
+import technicalDrawingVisualNoteCreateReducer from './slices/technicalDrawingVisualNoteCreateSlice'
+import technicalDrawingVisualNoteGetReducer from './slices/technicalDrawingVisualNoteGetSlice'
+import technicalDrawingVisualNoteGetAllByDrawingReducer from './slices/technicalDrawingVisualNoteGetAllByDrawingSlice'
+import technicalDrawingVisualNoteDeleteReducer from './slices/technicalDrawingVisualNoteDeleteSlice'
 
 export const store = configureStore({
     reducer: {
@@ -74,6 +82,10 @@ export const store = configureStore({
         assemblyNoteCreate: assemblyNoteCreateReducer,
         assemblyNoteUpdate: assemblyNoteUpdateReducer,
         assemblyNoteDelete: assemblyNoteDeleteReducer,
+        assemblyVisualNoteGetAllByDrawing: assemblyVisualNoteGetAllByDrawingReducer,
+        assemblyVisualNoteGet: assemblyVisualNoteGetReducer,
+        assemblyVisualNoteCreate: assemblyVisualNoteCreateReducer,
+        assemblyVisualNoteDelete: assemblyVisualNoteDeleteReducer,
         assemblySuccessGetAll: assemblySuccessGetAllReducer,
         assemblySuccessGetAllByManual: assemblySuccessGetAllByManualReducer,
         assemblySuccessGet: assemblySuccessGetReducer,
@@ -104,6 +116,11 @@ export const store = configureStore({
         technicalDrawingNoteCreate: technicalDrawingNoteCreateReducer,
         technicalDrawingNoteUpdate: technicalDrawingNoteUpdateReducer,
         technicalDrawingNoteDelete: technicalDrawingNoteDeleteReducer,
+        technicalDrawingNoteDelete: technicalDrawingNoteDeleteReducer,
+        technicalDrawingVisualNoteDelete: technicalDrawingVisualNoteDeleteReducer,
+        technicalDrawingVisualNoteGetAllByDrawing: technicalDrawingVisualNoteGetAllByDrawingReducer,
+        technicalDrawingVisualNoteGet: technicalDrawingVisualNoteGetReducer,
+        technicalDrawingVisualNoteCreate: technicalDrawingVisualNoteCreateReducer,
         technicalDrawingSuccessGetAll: technicalDrawingSuccessGetAllReducer,
         technicalDrawingSuccessGetAllByDrawing: technicalDrawingSuccessGetAllByDrawingReducer,
         technicalDrawingSuccessGet: technicalDrawingSuccessGetReducer,

@@ -13,6 +13,8 @@ import TechnicalDrawingPage from '../pages/technical-drawing';
 import TechnicalDrawingSuccessPage from '../pages/technical-drawing/technical-drawing-success';
 import TechnicalDrawingNotePage from '../pages/technical-drawing/technical-drawing-note';
 import TechnicalDrawingFailurePage from '../pages/technical-drawing/technical-drawing-failure';
+import TechnicalDrawingVisualNotePage from '../pages/technical-drawing/technical-drawing-visual-note';
+import AssemblyVisualNotePage from '../pages/assembly-manuel/assembly-visual-note';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -38,6 +40,7 @@ const AnimatedRoutes = () => {
                 <Route path='/assembly-manual' element={isAuth ? <AssemblyManuelPage /> : <LoginPage />} />
                 <Route path='/assembly-success/:id' element={isAuth ? <AssemblySuccessPage /> : <LoginPage />} />
                 <Route path='/assembly-note/:id' element={isAuth ? <AssemblyNotePage /> : <LoginPage />} />
+                <Route path='/assembly-visual-note/:id' element={isAuth ? <AssemblyVisualNotePage /> : <LoginPage />} />
                 <Route path='/assembly-failure/:id' element={isAuth ? <AssemblyFailurePage /> : <LoginPage />} />
                 <Route path='/employee' element={isAuth ? <EmployeePage /> : <LoginPage />} />
                 <Route path='/login' element={isAuth ? <HomePage /> : <LoginPage />} />
@@ -45,6 +48,7 @@ const AnimatedRoutes = () => {
                 <Route path='/technical-drawing' element={isAuth ? <TechnicalDrawingPage /> : <LoginPage />} />
                 <Route path='/technical-drawing-success/:id' element={isAuth ? <TechnicalDrawingSuccessPage /> : <LoginPage />} />
                 <Route path='/technical-drawing-note/:id' element={isAuth ? <TechnicalDrawingNotePage /> : <LoginPage />} />
+                <Route path='/technical-drawing-visual-note/:id' element={isAuth ? <TechnicalDrawingVisualNotePage /> : <LoginPage />} />
                 <Route path='/technical-drawing-failure/:id' element={isAuth ? <TechnicalDrawingFailurePage /> : <LoginPage />} />
                 <Route path='/*' element={isAuth ? <HomePage /> : <LoginPage />} />
             </Routes>

@@ -432,6 +432,14 @@
     height: 90px;
 }
 
+.h120 {
+    height: 120px;
+}
+
+.h150 {
+    height: 150px;
+}
+
 .h100 {
     height: 100vh !important;
 }
@@ -558,4 +566,16 @@
 
 .overflow-y-auto {
     overflow-y: auto;
+}
+
+.erpshadow {
+    transition: .4s;
+}
+
+.erpshadow:hover {
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
+.contain {
+    object-fit: contain;
 }

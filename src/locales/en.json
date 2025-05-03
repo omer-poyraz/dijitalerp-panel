@@ -103,6 +103,8 @@
     "operator": "Operator",
     "total_projects": "Total Projects",
     "my_profile": "My Profile",
+    "visual_notes": "Visual Notes",
+    "visual_notes_description": "Manage your visual notes",
     "avg_production_qty": "Avg. Production Qty",
     "last_updated": "Last Updated",
     "filter_all": "All Items",
