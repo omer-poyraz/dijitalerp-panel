@@ -14,7 +14,7 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => 
             return (
                 <div className='h40 w40 round border d-flex justify-content-center align-items-center'>
                     {
-                        a?.file ? <img src={`${URL}${a?.file}`} className='h30 w30 round' alt='' />
+                        a?.file ? <img src={`${a?.file.search("http") === -1 ? URL : ""}${a?.file}`} className='h30 w30 round' alt='' />
                             : <span className='color4'>{a?.id}</span>
                     }
                 </div>
@@ -24,11 +24,11 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => 
     {
         title: t('name'),
         key: t('name'),
-        sorter: (a, b) => a?.technician.localeCompare(b.technician),
+        sorter: (a, b) => a?.firstName.localeCompare(b.firstName),
         render: (a) => {
             return (
                 <div>
-                    <div><span>{a?.name} {a?.surname}</span></div>
+                    <div><span>{a?.firstName} {a?.lastName}</span></div>
                     <div><small className='color4'>{a?.email}</small></div>
                 </div>
             )
@@ -40,8 +40,8 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => 
         render: (a) => {
             return (
                 <div>
-                    <div><span>{a?.phone}</span></div>
-                    <div><small className='color4'>{new Date(a?.startdate).toLocaleDateString("tr-TR")}</small></div>
+                    <div><span>{a?.phoneNumber}</span></div>
+                    <div><small className='color4'>{new Date(a?.startDate).toLocaleDateString("tr-TR")}</small></div>
                 </div>
             )
         }
@@ -63,17 +63,12 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => 
         }
     },
     {
-        title: t("make_user"),
-        key: 'make_user',
-        sorter: (a, b) => a?.user.firstName - b?.user.firstName,
+        title: t('role'),
+        key: t('role'),
         render: (a) => {
             return (
-                <div className='d-flex justify-content-start align-items-center'>
-                    <div><PiClockUser size={25} className='color4' /></div>
-                    <div className='ml-2'>
-                        <div><span>{a?.user?.firstName + " " + a?.user?.lastName.toUpperCase()}</span></div>
-                        <div><small className='color4'>{a?.user?.email}</small></div>
-                    </div>
+                <div>
+                    <div><span>{a?.roles[0]?.name}</span></div>
                 </div>
             )
         }
@@ -84,7 +79,7 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => 
             return (
                 <div className='d-flex justify-content-start'>
                     <div
-                        onClick={() => { setSelectedItem(a?.id); setModal(!modal) }}
+                        onClick={() => { setSelectedItem(a?.userId); setModal(!modal) }}
                         className='text-primary border ml-2 p-2 cp'
                     >
                         <BiEdit size={22} />
@@ -92,7 +87,7 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => 
                     <div className='text-danger border ml-2 rounded p-2 cp'>
                         <Popconfirm
                             title={t("content_delete_desc")}
-                            onConfirm={() => deleteData(a?.id)}
+                            onConfirm={() => deleteData(a?.userId)}
                             okText={t("yes")}
                             cancelText={t("no")}
                         >

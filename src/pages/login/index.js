@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, CardBody, Form, FormGroup, Input, Button, InputGroup, InputGroupText } from 'reactstrap';
-import { Checkbox, Divider } from 'antd';
+import { Checkbox } from 'antd';
 import { UserOutlined, LockOutlined, EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import logo from '../../images/logo2.png';
 import logo2 from '../../images/logo3.png';
@@ -12,7 +12,7 @@ const LoginPage = () => {
     const { t, i18n } = useTranslation();
     const handleLogin = LoginComponent();
 
-    const [formData, setFormData] = useState({ userName: '', password: '', rememberMe: false });
+    const [formData, setFormData] = useState({ userName: 'SuperAdmin', password: 'DijitalErp123.', rememberMe: false });
     const languages = [{ code: 'en', name: 'English' }, { code: 'tr', name: 'Türkçe' }];
 
     const changeLanguage = (languageCode) => {

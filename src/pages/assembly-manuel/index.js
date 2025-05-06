@@ -47,11 +47,11 @@ const AssemblyManuelPage = () => {
             var data = await dispatch(fetchEmployeeGetAll())
             if (data.payload) {
                 formValues[3].options = data.payload.map((item) => ({
-                    label: `${item.name} ${item.surname}`,
+                    label: `${item.firstName} ${item.lastName}`,
                     value: item.id
                 }));
                 formValues[4].options = data.payload.map((item) => ({
-                    label: `${item.name} ${item.surname}`,
+                    label: `${item.firstName} ${item.lastName}`,
                     value: item.id
                 }));
             }

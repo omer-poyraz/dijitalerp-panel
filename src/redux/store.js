@@ -61,6 +61,16 @@ import technicalDrawingVisualNoteCreateReducer from './slices/technicalDrawingVi
 import technicalDrawingVisualNoteGetReducer from './slices/technicalDrawingVisualNoteGetSlice'
 import technicalDrawingVisualNoteGetAllByDrawingReducer from './slices/technicalDrawingVisualNoteGetAllByDrawingSlice'
 import technicalDrawingVisualNoteDeleteReducer from './slices/technicalDrawingVisualNoteDeleteSlice'
+import userCreateReducer from './slices/userCreateSlice'
+import userUpdateReducer from './slices/userUpdateSlice'
+import userDeleteReducer from './slices/userDeleteSlice'
+import userGetAllReducer from './slices/userGetAllSlice'
+import userGetReducer from './slices/userGetSlice'
+import departmentGetAllReducer from './slices/departmentGetAllSlice'
+import departmentGetReducer from './slices/departmentGetSlice'
+import departmentCreateReducer from './slices/departmentCreateSlice'
+import departmentUpdateReducer from './slices/departmentUpdateSlice'
+import departmentDeleteReducer from './slices/departmentDeleteSlice'
 
 export const store = configureStore({
     reducer: {
@@ -92,6 +102,11 @@ export const store = configureStore({
         assemblySuccessCreate: assemblySuccessCreateReducer,
         assemblySuccessUpdate: assemblySuccessUpdateReducer,
         assemblySuccessDelete: assemblySuccessDeleteReducer,
+        departmentGetAll: departmentGetAllReducer,
+        departmentGet: departmentGetReducer,
+        departmentCreate: departmentCreateReducer,
+        departmentUpdate: departmentUpdateReducer,
+        departmentDelete: departmentDeleteReducer,
         employeeGetAll: employeeGetAllReducer,
         employeeGet: employeeGetReducer,
         employeeCreate: employeeCreateReducer,
@@ -127,6 +142,11 @@ export const store = configureStore({
         technicalDrawingSuccessCreate: technicalDrawingSuccessCreateReducer,
         technicalDrawingSuccessUpdate: technicalDrawingSuccessUpdateReducer,
         technicalDrawingSuccessDelete: technicalDrawingSuccessDeleteReducer,
+        userCreate: userCreateReducer,
+        userUpdate: userUpdateReducer,
+        userDelete: userDeleteReducer,
+        userGetAll: userGetAllReducer,
+        userGet: userGetReducer,
     },
 });
 

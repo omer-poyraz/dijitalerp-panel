@@ -101,6 +101,8 @@
     "inappropriateness": "Inappropriateness",
     "technician": "Technician",
     "operator": "Operator",
+    "department": "Department",
+    "role": "Rol",
     "total_projects": "Total Projects",
     "my_profile": "My Profile",
     "visual_notes": "Visual Notes",

@@ -80,7 +80,7 @@ const Header = () => {
         { path: "/product", label: t("product") },
         { path: "/customers", label: t("customers") },
         { path: "/technical-drawing", label: t("technical_drawing") },
-        { path: "/employee", label: t("employee") },
+        { path: "/user", label: t("employee") },
         { path: "/settings", label: t("settings") },
     ];
 
