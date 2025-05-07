@@ -13,7 +13,7 @@ import { fetchTechnicalDrawingDelete } from '../../redux/slices/technicalDrawing
 import { fetchTechnicalDrawingGet } from '../../redux/slices/technicalDrawingGetSlice';
 import { fetchTechnicalDrawingUpdate } from '../../redux/slices/technicalDrawingUpdateSlice';
 import { useNavigate } from 'react-router-dom';
-import { fetchEmployeeGetAll } from '../../redux/slices/employeeGetAllSlice';
+import { fetchUserGetAll } from '../../redux/slices/userGetAllSlice';
 
 const TechnicalDrawingPage = () => {
     const { t } = useTranslation();
@@ -44,15 +44,15 @@ const TechnicalDrawingPage = () => {
         try {
             setLoading(true);
             await dispatch(fetchTechnicalDrawingGetAll());
-            var data = await dispatch(fetchEmployeeGetAll())
+            var data = await dispatch(fetchUserGetAll())
             if (data.payload) {
                 formValues[3].options = data.payload.map((item) => ({
-                    label: `${item.name} ${item.surname}`,
-                    value: item.id
+                    label: `${item.firstName} ${item.lastName}`,
+                    value: item.userId
                 }));
                 formValues[4].options = data.payload.map((item) => ({
-                    label: `${item.name} ${item.surname}`,
-                    value: item.id
+                    label: `${item.firstName} ${item.lastName}`,
+                    value: item.userId
                 }));
             }
             setLoading(false);

@@ -1,4 +1,4 @@
-import { Popconfirm } from 'antd';
+import { Popconfirm, Tooltip } from 'antd';
 import { BiEdit } from 'react-icons/bi';
 import { BsClock } from 'react-icons/bs';
 import { FaFile } from 'react-icons/fa';
@@ -79,41 +79,53 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal, navig
                         onClick={() => { setSelectedItem(a?.id); setModal(!modal) }}
                         className='text-primary rounded border ml-2 p-2 cp'
                     >
-                        <BiEdit size={22} />
+                        <Tooltip title={t("edit")}>
+                            <BiEdit size={22} />
+                        </Tooltip>
                     </div>
                     <div
                         onClick={() => navigation(`/technical-drawing-success/${a?.id}`)}
                         className='text-success rounded border ml-2 p-2 cp'
                     >
-                        <IoMdCheckmarkCircleOutline size={22} />
+                        <Tooltip title={t("success")}>
+                            <IoMdCheckmarkCircleOutline size={22} />
+                        </Tooltip>
                     </div>
                     <div
                         onClick={() => navigation(`/technical-drawing-failure/${a?.id}`)}
                         className='text-danger rounded border ml-2 p-2 cp'
                     >
-                        <MdOutlineErrorOutline size={22} />
+                        <Tooltip title={t("failure")}>
+                            <MdOutlineErrorOutline size={22} />
+                        </Tooltip>
                     </div>
                     <div
                         onClick={() => navigation(`/technical-drawing-note/${a?.id}`)}
                         className='text-info rounded border ml-2 p-2 cp'
                     >
-                        <MdOutlineSpeakerNotes size={22} />
+                        <Tooltip title={t("note")}>
+                            <MdOutlineSpeakerNotes size={22} />
+                        </Tooltip>
                     </div>
                     <div
                         onClick={() => navigation(`/technical-drawing-visual-note/${a?.id}`)}
                         className='text-warning rounded border ml-2 p-2 cp'
                     >
-                        <IoCameraOutline size={22} />
+                        <Tooltip title={t("visual_note")}>
+                            <IoCameraOutline size={22} />
+                        </Tooltip>
                     </div>
                     <div className='text-danger rounded border ml-2 rounded p-2 cp'>
-                        <Popconfirm
-                            title={t("content_delete_desc")}
-                            onConfirm={() => deleteData(a?.id)}
-                            okText={t("yes")}
-                            cancelText={t("no")}
-                        >
-                            <TbTrash size={22} />
-                        </Popconfirm>
+                        <Tooltip title={t("delete")}>
+                            <Popconfirm
+                                title={t("content_delete_desc")}
+                                onConfirm={() => deleteData(a?.id)}
+                                okText={t("yes")}
+                                cancelText={t("no")}
+                            >
+                                <TbTrash size={22} />
+                            </Popconfirm>
+                        </Tooltip>
                     </div>
                 </div >
             )

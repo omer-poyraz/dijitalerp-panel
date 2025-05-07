@@ -13,7 +13,7 @@ import { fetchAssemblyManualDelete } from '../../redux/slices/assemblyManualDele
 import { fetchAssemblyManualGet } from '../../redux/slices/assemblyManualGetSlice';
 import { fetchAssemblyManualUpdate } from '../../redux/slices/assemblyManualUpdateSlice';
 import { useNavigate } from 'react-router-dom';
-import { fetchEmployeeGetAll } from '../../redux/slices/employeeGetAllSlice';
+import { fetchUserGetAll } from '../../redux/slices/userGetAllSlice';
 
 const AssemblyManuelPage = () => {
     const { t } = useTranslation();
@@ -28,9 +28,10 @@ const AssemblyManuelPage = () => {
         { label: t("files"), col: 6, key: "file", type: "file" },
         { label: t("project_name"), col: 6, key: "projectName", type: "text" },
         { label: t("part_code"), col: 6, key: "partCode", type: "text" },
-        { label: t("responible"), col: 6, key: "responibleID", type: "select", },
-        { label: t("person_in_charge"), col: 6, key: "personInChargeID", type: "select" },
         { label: t("serial_number"), col: 6, key: "serialNumber", type: "text" },
+        { label: t("quality_officer"), col: 4, key: "qualityOfficerID", type: "select" },
+        { label: t("person_in_charge"), col: 4, key: "personInChargeID", type: "select" },
+        { label: t("responible"), col: 4, key: "responibleID", type: "select", },
         { label: t("production_quantity"), col: 6, key: "productionQuantity", type: "number" },
         { label: t("time"), col: 6, key: "time", type: "number" },
         { label: t("date"), col: 6, key: "date", type: "date" },
@@ -44,15 +45,19 @@ const AssemblyManuelPage = () => {
         try {
             setLoading(true);
             await dispatch(fetchAssemblyManualGetAll());
-            var data = await dispatch(fetchEmployeeGetAll())
+            var data = await dispatch(fetchUserGetAll({ search: "", pageNumber: 1, pageSize: 100 }));
             if (data.payload) {
-                formValues[3].options = data.payload.map((item) => ({
-                    label: `${item.firstName} ${item.lastName}`,
-                    value: item.id
-                }));
                 formValues[4].options = data.payload.map((item) => ({
                     label: `${item.firstName} ${item.lastName}`,
-                    value: item.id
+                    value: item.userId
+                }));
+                formValues[5].options = data.payload.map((item) => ({
+                    label: `${item.firstName} ${item.lastName}`,
+                    value: item.userId
+                }));
+                formValues[6].options = data.payload.map((item) => ({
+                    label: `${item.firstName} ${item.lastName}`,
+                    value: item.userId
                 }));
             }
             setLoading(false);
@@ -89,6 +94,7 @@ const AssemblyManuelPage = () => {
                     partCode: data.payload.partCode,
                     responibleID: data.payload.responibleID,
                     personInChargeID: data.payload.personInChargeID,
+                    qualityOfficerID: data.payload.qualityOfficerID,
                     serialNumber: data.payload.serialNumber,
                     productionQuantity: data.payload.productionQuantity,
                     time: data.payload.time,

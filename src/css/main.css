@@ -81,6 +81,15 @@ h6 {
     font-size: 14px;
 }
 
+.ant-form-item-label {
+    margin-bottom: 0px;
+    padding-bottom: 0 !important;
+}
+
+.ant-form-item-required {
+    color: #6e6e6e6e;
+}
+
 
 /* .header */
 
@@ -329,18 +338,18 @@ h6 {
 
 .product-dropdown {
     position: absolute;
-    top: 100%;
-    left: 0;
-    width: 220px;
-    background-color: white;
-    border-radius: 8px;
+    background: #fff;
+    min-width: 200px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    animation: fadeIn 0.3s ease;
     z-index: 1001;
-    margin-top: 0px;
-    padding-top: 0px;
     padding: 0 10px;
+    border-radius: 10px;
+}
+
+.product-dropdown .product-dropdown {
+    left: 100%;
+    top: 0;
+    z-index: 1002;
 }
 
 .has-submenu:hover>a {
@@ -360,6 +369,10 @@ h6 {
     box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.04);
 }
 
+.product-dropdown .product-dropdown::before {
+    display: none;
+}
+
 .product-menu-items {
     padding: 10px 0;
 }
@@ -367,7 +380,7 @@ h6 {
 .product-menu-item {
     display: flex;
     align-items: center;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     color: #333;
     text-decoration: none;
     transition: background-color 0.2s ease;
@@ -410,6 +423,7 @@ h6 {
 .login-branding img:first-child {
     height: 60px;
 }
+
 .login-branding img:last-child {
     height: 60px;
     margin-left: 5px;

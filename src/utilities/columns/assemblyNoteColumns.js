@@ -1,4 +1,4 @@
-import { Popconfirm } from 'antd';
+import { Popconfirm, Tooltip } from 'antd';
 import { BiEdit } from 'react-icons/bi';
 import { BsClock } from 'react-icons/bs';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
@@ -84,17 +84,21 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => 
                         onClick={() => { setSelectedItem(a?.id); setModal(!modal) }}
                         className='text-primary border ml-2 p-2 cp'
                     >
-                        <BiEdit size={22} />
+                        <Tooltip title={t("edit")}>
+                            <BiEdit size={22} />
+                        </Tooltip>
                     </div>
                     <div className='text-danger border ml-2 rounded p-2 cp'>
-                        <Popconfirm
-                            title={t("content_delete_desc")}
-                            onConfirm={() => deleteData(a?.id)}
-                            okText={t("yes")}
-                            cancelText={t("no")}
-                        >
-                            <TbTrash size={22} />
-                        </Popconfirm>
+                        <Tooltip title={t("delete")}>
+                            <Popconfirm
+                                title={t("content_delete_desc")}
+                                onConfirm={() => deleteData(a?.id)}
+                                okText={t("yes")}
+                                cancelText={t("no")}
+                            >
+                                <TbTrash size={22} />
+                            </Popconfirm>
+                        </Tooltip>
                     </div>
                 </div >
             )

@@ -1,10 +1,8 @@
 import { Popconfirm, Tooltip } from 'antd';
-import { BiEdit } from 'react-icons/bi';
 import { BsClock } from 'react-icons/bs';
 import { TbTrash } from 'react-icons/tb';
-import { URL } from '../../api';
 
-export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => [
+export const columns = ({ t, deleteData }) => [
     {
         title: "",
         key: "empty",
@@ -12,35 +10,31 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => 
         render: (a) => {
             return (
                 <div className='h40 w40 round border d-flex justify-content-center align-items-center'>
-                    {
-                        a?.file ? <img src={`${a?.file.search("http") === -1 ? URL : ""}${a?.file}`} className='h30 w30 round' alt='' />
-                            : <span className='color4'>{a?.id}</span>
-                    }
+                    <span className='color4'>{a?.id}</span>
                 </div>
             )
         }
     },
     {
-        title: t('name'),
-        key: t('name'),
-        sorter: (a, b) => a?.firstName.localeCompare(b.firstName),
+        title: t('note'),
+        key: t('note'),
+        sorter: (a, b) => a?.note.localeCompare(b.note),
         render: (a) => {
             return (
                 <div>
-                    <div><span>{a?.firstName} {a?.lastName}</span></div>
-                    <div><small className='color4'>{a?.email}</small></div>
+                    <div><span>{a?.note}</span></div>
                 </div>
             )
         }
     },
     {
-        title: t('phone'),
-        key: t('phone'),
+        title: t('description'),
+        key: t('description'),
+        sorter: (a, b) => a?.description.localeCompare(b.description),
         render: (a) => {
             return (
                 <div>
-                    <div><span>{a?.phoneNumber}</span></div>
-                    <div><small className='color4'>{new Date(a?.startDate).toLocaleDateString("tr-TR")}</small></div>
+                    <div><span>{a?.description}</span></div>
                 </div>
             )
         }
@@ -62,34 +56,15 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => 
         }
     },
     {
-        title: t('role'),
-        key: t('role'),
-        render: (a) => {
-            return (
-                <div>
-                    <div><span>{a?.roles[0]?.name}</span></div>
-                </div>
-            )
-        }
-    },
-    {
         title: t('process'),
         render: (a) => {
             return (
                 <div className='d-flex justify-content-start'>
-                    <div
-                        onClick={() => { setSelectedItem(a?.userId); setModal(!modal) }}
-                        className='text-primary border ml-2 p-2 cp'
-                    >
-                        <Tooltip title={t("edit")}>
-                            <BiEdit size={22} />
-                        </Tooltip>
-                    </div>
                     <div className='text-danger border ml-2 rounded p-2 cp'>
                         <Tooltip title={t("delete")}>
                             <Popconfirm
                                 title={t("content_delete_desc")}
-                                onConfirm={() => deleteData(a?.userId)}
+                                onConfirm={() => deleteData(a?.id)}
                                 okText={t("yes")}
                                 cancelText={t("no")}
                             >

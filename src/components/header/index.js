@@ -5,17 +5,18 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaBars, FaTimes, FaUser, FaCog, FaSignOutAlt, FaChevronDown } from 'react-icons/fa';
 import profile from '../../images/profile.png';
+import { BiChevronRight } from 'react-icons/bi';
 
 const Header = () => {
     const { t } = useTranslation();
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
-    const [productMenuOpen, setProductMenuOpen] = useState(false);
+    const [openSubMenuIndex, setOpenSubMenuIndex] = useState(null);
+    const [openNestedSubMenuIndex, setOpenNestedSubMenuIndex] = useState({});
     const location = useLocation();
     const navigate = useNavigate();
     const profileRef = useRef(null);
-    const productRef = useRef(null);
     const auth = JSON.parse(localStorage.getItem("auth"));
 
     const productSubMenuItems = [
@@ -76,13 +77,77 @@ const Header = () => {
     };
 
     const menuItems = [
-        { path: "/assembly-manual", label: t("assembly_manual") },
+        {
+            path: "#",
+            label: t("resources"),
+            hasSubmenu: true,
+            submenuItems: [
+                {
+                    path: "/assembly-manual",
+                    label: t("assembly_manual"),
+                    hasSubmenu: true,
+                    submenuItems: [
+                        { path: "/assembly-manual/quality", label: t("quality_management") },
+                    ]
+                },
+                {
+                    path: "/technical-drawing",
+                    label: t("technical_drawing"),
+                    hasSubmenu: true,
+                    submenuItems: [
+                        { path: "/technical-drawing/quality", label: t("quality_management") },
+                    ]
+                },
+                { path: "/department", label: t("department") },
+            ]
+        },
         { path: "/product", label: t("product") },
         { path: "/customers", label: t("customers") },
-        { path: "/technical-drawing", label: t("technical_drawing") },
         { path: "/user", label: t("employee") },
-        { path: "/settings", label: t("settings") },
     ];
+
+    const renderMenuItems = (items, parentKey = '') =>
+        items.map((item, idx) => {
+            const key = parentKey + idx;
+            return (
+                <div
+                    key={key}
+                    className="product-menu-item d-flex justify-content-between align-items-center"
+                    onMouseEnter={() => {
+                        if (item.hasSubmenu) setOpenNestedSubMenuIndex(prev => ({ ...prev, [key]: true }));
+                    }}
+                    onMouseLeave={() => {
+                        if (item.hasSubmenu) setOpenNestedSubMenuIndex(prev => ({ ...prev, [key]: false }));
+                    }}
+                    style={{ position: 'relative' }}
+                >
+                    <Link
+                        to={item.path}
+                        onClick={closeMenu}
+                        style={{ width: '100%' }}
+                    >
+                        <span>{item.label}</span>
+                    </Link>
+                    {item.hasSubmenu && <div><BiChevronRight size={20} /></div>}
+                    {item.hasSubmenu && openNestedSubMenuIndex[key] && (
+                        <div
+                            className="product-dropdown"
+                            style={{
+                                left: '100%',
+                                top: 0,
+                                minWidth: 200,
+                                position: 'absolute',
+                                zIndex: 1002,
+                            }}
+                        >
+                            <div className="product-menu-items">
+                                {renderMenuItems(item.submenuItems, key)}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        });
 
     return (
         <header className={`modern-header ${scrolled ? 'scrolled' : ''}`}>
@@ -105,9 +170,9 @@ const Header = () => {
                                 <li
                                     key={index}
                                     className={`${isActive(item.path) ? 'active' : ''} ${item.hasSubmenu ? 'has-submenu' : ''}`}
-                                    ref={item.path === "/product" ? productRef : null}
-                                    onMouseEnter={() => item.path === "/product" && setProductMenuOpen(true)}
-                                    onMouseLeave={() => item.path === "/product" && setProductMenuOpen(false)}
+                                    onMouseEnter={() => item.hasSubmenu && setOpenSubMenuIndex(index)}
+                                    onMouseLeave={() => item.hasSubmenu && setOpenSubMenuIndex(null)}
+                                    style={{ position: 'relative' }}
                                 >
                                     <Link
                                         to={item.path}
@@ -117,20 +182,10 @@ const Header = () => {
                                         {item.label}
                                         {item.hasSubmenu && <FaChevronDown className="submenu-icon" />}
                                     </Link>
-
-                                    {item.hasSubmenu && productMenuOpen && (
-                                        <div className="product-dropdown">
+                                    {item.hasSubmenu && openSubMenuIndex === index && (
+                                        <div className="product-dropdown" style={{ left: 0, top: '100%', minWidth: 220, position: 'absolute' }}>
                                             <div className="product-menu-items">
-                                                {productSubMenuItems.map((subItem, subIndex) => (
-                                                    <Link
-                                                        key={subIndex}
-                                                        to={subItem.path}
-                                                        className="product-menu-item"
-                                                        onClick={closeMenu}
-                                                    >
-                                                        <span>{subItem.label}</span>
-                                                    </Link>
-                                                ))}
+                                                {renderMenuItems(item.submenuItems, `${index}-`)}
                                             </div>
                                         </div>
                                     )}

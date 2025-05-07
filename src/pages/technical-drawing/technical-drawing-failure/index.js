@@ -13,7 +13,7 @@ import ERPForm from '../../../components/page/ERPForm'
 import { fetchTechnicalDrawingFailureCreate } from '../../../redux/slices/technicalDrawingFailureCreateSlice'
 import { fetchTechnicalDrawingFailureUpdate } from '../../../redux/slices/technicalDrawingFailureUpdateSlice'
 import Alerts from '../../../components/page/Alert'
-import { fetchEmployeeGetAll } from '../../../redux/slices/employeeGetAllSlice'
+import { fetchUserGetAll } from '../../../redux/slices/userGetAllSlice'
 
 const TechnicalDrawingFailurePage = () => {
     const { t } = useTranslation()
@@ -40,11 +40,11 @@ const TechnicalDrawingFailurePage = () => {
         setLoading(true)
         await dispatch(fetchTechnicalDrawingGet({ id: id }))
         await dispatch(fetchTechnicalDrawingFailureGetAllByDrawing({ id: id }))
-        var data = await dispatch(fetchEmployeeGetAll())
+        var data = await dispatch(fetchUserGetAll({ search: "", pageNumber: 1, pageSize: 100 }))
         if (data.payload) {
             formValues[0].options = data.payload.map((item) => ({
-                label: `${item.name} ${item.surname}`,
-                value: item.id
+                label: `${item.fistName} ${item.lastName}`,
+                value: item.userId
             }));
         }
         setLoading(false)

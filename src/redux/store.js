@@ -71,6 +71,12 @@ import departmentGetReducer from './slices/departmentGetSlice'
 import departmentCreateReducer from './slices/departmentCreateSlice'
 import departmentUpdateReducer from './slices/departmentUpdateSlice'
 import departmentDeleteReducer from './slices/departmentDeleteSlice'
+import assemblyQualityGetAllByFailureReducer from './slices/assemblyQualityGetAllByFailureSlice'
+import assemblyQualityGetAllReducer from './slices/assemblyQualityGetAllSlice'
+import assemblyQualityDeleteReducer from './slices/assemblyQualityDeleteSlice'
+import technicalDrawingQualityGetAllByFailureReducer from './slices/technicalDrawingQualityGetAllByFailureSlice'
+import technicalDrawingQualityGetAllReducer from './slices/technicalDrawingQualityGetAllSlice'
+import technicalDrawingQualityDeleteReducer from './slices/technicalDrawingQualityDeleteSlice'
 
 export const store = configureStore({
     reducer: {
@@ -102,6 +108,9 @@ export const store = configureStore({
         assemblySuccessCreate: assemblySuccessCreateReducer,
         assemblySuccessUpdate: assemblySuccessUpdateReducer,
         assemblySuccessDelete: assemblySuccessDeleteReducer,
+        assemblyQualityGetAllByFailure: assemblyQualityGetAllByFailureReducer,
+        assemblyQualityGetAll: assemblyQualityGetAllReducer,
+        assemblyQualityDelete: assemblyQualityDeleteReducer,
         departmentGetAll: departmentGetAllReducer,
         departmentGet: departmentGetReducer,
         departmentCreate: departmentCreateReducer,
@@ -142,6 +151,9 @@ export const store = configureStore({
         technicalDrawingSuccessCreate: technicalDrawingSuccessCreateReducer,
         technicalDrawingSuccessUpdate: technicalDrawingSuccessUpdateReducer,
         technicalDrawingSuccessDelete: technicalDrawingSuccessDeleteReducer,
+        technicalDrawingQualityGetAllByFailure: technicalDrawingQualityGetAllByFailureReducer,
+        technicalDrawingQualityGetAll: technicalDrawingQualityGetAllReducer,
+        technicalDrawingQualityDelete: technicalDrawingQualityDeleteReducer,
         userCreate: userCreateReducer,
         userUpdate: userUpdateReducer,
         userDelete: userDeleteReducer,

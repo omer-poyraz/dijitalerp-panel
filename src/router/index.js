@@ -15,6 +15,12 @@ import TechnicalDrawingFailurePage from '../pages/technical-drawing/technical-dr
 import TechnicalDrawingVisualNotePage from '../pages/technical-drawing/technical-drawing-visual-note';
 import AssemblyVisualNotePage from '../pages/assembly-manuel/assembly-visual-note';
 import UserPage from '../pages/user';
+import DepartmentPage from '../pages/department';
+import ProfilePage from '../pages/profile';
+import AssemblyQualityPage from '../pages/assembly-quality';
+import AssemblyQualityManualPage from '../pages/assembly-quality/manual';
+import TechnicalDrawingQualityPage from '../pages/technical-drawing-quality';
+import TechnicalDrawingQualityDrawingPage from '../pages/technical-drawing-quality/manual';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -42,14 +48,20 @@ const AnimatedRoutes = () => {
                 <Route path='/assembly-note/:id' element={isAuth ? <AssemblyNotePage /> : <LoginPage />} />
                 <Route path='/assembly-visual-note/:id' element={isAuth ? <AssemblyVisualNotePage /> : <LoginPage />} />
                 <Route path='/assembly-failure/:id' element={isAuth ? <AssemblyFailurePage /> : <LoginPage />} />
+                <Route path='/assembly-manual/quality' element={isAuth ? <AssemblyQualityPage /> : <LoginPage />} />
+                <Route path='/assembly-manual/quality/:id' element={isAuth ? <AssemblyQualityManualPage /> : <LoginPage />} />
+                <Route path='/department' element={isAuth ? <DepartmentPage /> : <LoginPage />} />
                 <Route path='/user' element={isAuth ? <UserPage /> : <LoginPage />} />
                 <Route path='/login' element={isAuth ? <HomePage /> : <LoginPage />} />
                 <Route path='/product' element={isAuth ? <ProductPage /> : <LoginPage />} />
+                <Route path='/profile' element={isAuth ? <ProfilePage /> : <LoginPage />} />
                 <Route path='/technical-drawing' element={isAuth ? <TechnicalDrawingPage /> : <LoginPage />} />
                 <Route path='/technical-drawing-success/:id' element={isAuth ? <TechnicalDrawingSuccessPage /> : <LoginPage />} />
                 <Route path='/technical-drawing-note/:id' element={isAuth ? <TechnicalDrawingNotePage /> : <LoginPage />} />
                 <Route path='/technical-drawing-visual-note/:id' element={isAuth ? <TechnicalDrawingVisualNotePage /> : <LoginPage />} />
                 <Route path='/technical-drawing-failure/:id' element={isAuth ? <TechnicalDrawingFailurePage /> : <LoginPage />} />
+                <Route path='/technical-drawing/quality' element={isAuth ? <TechnicalDrawingQualityPage /> : <LoginPage />} />
+                <Route path='/technical-drawing/quality/:id' element={isAuth ? <TechnicalDrawingQualityDrawingPage /> : <LoginPage />} />
                 <Route path='/*' element={isAuth ? <HomePage /> : <LoginPage />} />
             </Routes>
         </AnimatePresence>

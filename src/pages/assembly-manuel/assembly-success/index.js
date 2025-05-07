@@ -13,7 +13,7 @@ import { fetchAssemblySuccessDelete } from '../../../redux/slices/assemblySucces
 import { fetchAssemblySuccessCreate } from '../../../redux/slices/assemblySuccessCreateSlice'
 import { fetchAssemblySuccessUpdate } from '../../../redux/slices/assemblySuccessUpdateSlice'
 import { columns } from '../../../utilities/columns/assemblySuccessColumns'
-import { fetchEmployeeGetAll } from '../../../redux/slices/employeeGetAllSlice'
+import { fetchUserGetAll } from '../../../redux/slices/userGetAllSlice'
 
 const AssemblySuccessPage = () => {
     const { t } = useTranslation()
@@ -42,11 +42,11 @@ const AssemblySuccessPage = () => {
         setLoading(true)
         await dispatch(fetchAssemblyManualGet({ id: id }))
         await dispatch(fetchAssemblySuccessGetAllByManual({ id: id }))
-        var data = await dispatch(fetchEmployeeGetAll())
+        var data = await dispatch(fetchUserGetAll({ search: "", pageNumber: 1, pageSize: 100 }))
         if (data.payload) {
             formValues[0].options = data.payload.map((item) => ({
-                label: `${item.name} ${item.surname}`,
-                value: item.id
+                label: `${item.firstName} ${item.lastName}`,
+                value: item.userId
             }));
         }
         setLoading(false)

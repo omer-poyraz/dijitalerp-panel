@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ERP from '../../../components/general/ERP'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Banner from '../../../components/page/Banner'
 import { fetchAssemblyManualGet } from '../../../redux/slices/assemblyManualGetSlice'
@@ -13,7 +13,7 @@ import ERPForm from '../../../components/page/ERPForm'
 import { fetchAssemblyFailureCreate } from '../../../redux/slices/assemblyFailureCreateSlice'
 import { fetchAssemblyFailureUpdate } from '../../../redux/slices/assemblyFailureUpdateSlice'
 import Alerts from '../../../components/page/Alert'
-import { fetchEmployeeGetAll } from '../../../redux/slices/employeeGetAllSlice'
+import { fetchUserGetAll } from '../../../redux/slices/userGetAllSlice'
 
 const AssemblyFailurePage = () => {
     const { t } = useTranslation()
@@ -25,9 +25,9 @@ const AssemblyFailurePage = () => {
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
     const dispatch = useDispatch()
+    const navigation = useNavigate()
     const [formData, setFormData] = useState({ id: 0, file: [] });
     const [formValues] = useState([
-        // { label: t("inappropriateness"), col: 12, key: "inappropriateness", type: "text" },
         { label: t("technician"), col: 6, key: "technicianID", type: "select" },
         { label: t("part_code"), col: 6, key: "partCode", type: "text" },
         { label: t("pending_quantity"), col: 4, key: "pendingQuantity", type: "text" },
@@ -41,11 +41,11 @@ const AssemblyFailurePage = () => {
         setLoading(true)
         await dispatch(fetchAssemblyManualGet({ id: id }))
         await dispatch(fetchAssemblyFailureGetAllByManual({ id: id }))
-        var data = await dispatch(fetchEmployeeGetAll())
+        var data = await dispatch(fetchUserGetAll({ search: "", pageNumber: 1, pageSize: 100 }))
         if (data.payload) {
             formValues[0].options = data.payload.map((item) => ({
-                label: `${item.name} ${item.surname}`,
-                value: item.id
+                label: `${item.firstName} ${item.lastName}`,
+                value: item.userId
             }));
         }
         setLoading(false)
@@ -128,6 +128,7 @@ const AssemblyFailurePage = () => {
                     t: t,
                     setSelectedItem: setSelectedItem,
                     modal: modal,
+                    navigation: navigation,
                     deleteData: deleteData,
                     setModal: setModal,
                 })}

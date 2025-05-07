@@ -13,7 +13,7 @@ import { fetchTechnicalDrawingSuccessDelete } from '../../../redux/slices/techni
 import { fetchTechnicalDrawingSuccessCreate } from '../../../redux/slices/technicalDrawingSuccessCreateSlice'
 import { fetchTechnicalDrawingSuccessUpdate } from '../../../redux/slices/technicalDrawingSuccessUpdateSlice'
 import { columns } from '../../../utilities/columns/technicalDrawingSuccessColumns'
-import { fetchEmployeeGetAll } from '../../../redux/slices/employeeGetAllSlice'
+import { fetchUserGetAll } from '../../../redux/slices/userGetAllSlice'
 
 const TechnicalDrawingSuccessPage = () => {
     const { t } = useTranslation()
@@ -42,11 +42,11 @@ const TechnicalDrawingSuccessPage = () => {
         setLoading(true)
         await dispatch(fetchTechnicalDrawingGet({ id: id }))
         await dispatch(fetchTechnicalDrawingSuccessGetAllByDrawing({ id: id }))
-        var data = await dispatch(fetchEmployeeGetAll())
+        var data = await dispatch(fetchUserGetAll({ search: "", pageNumber: 1, pageSize: 100 }))
         if (data.payload) {
             formValues[0].options = data.payload.map((item) => ({
-                label: `${item.name} ${item.surname}`,
-                value: item.id
+                label: `${item.firstName} ${item.lastName}`,
+                value: item.userId
             }));
         }
         setLoading(false)
