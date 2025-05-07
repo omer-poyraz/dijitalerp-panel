@@ -65,6 +65,13 @@ export const EMPLOYEE_CREATE = `${URL}/Employee/Create`;
 export const EMPLOYEE_UPDATE = `${URL}/Employee/Update`;
 export const EMPLOYEE_DELETE = `${URL}/Employee/Delete`;
 
+//SERVICES
+export const SERVICES_GETALL = `${URL}/Services/GetAll`;
+export const SERVICES_GET = `${URL}/Services/Get`;
+export const SERVICES_CREATE = `${URL}/Services/Create`;
+export const SERVICES_UPDATE = `${URL}/Services/Update`;
+export const SERVICES_DELETE = `${URL}/Services/Delete`;
+
 // TECHNICAL_DRAWING
 export const TECHNICALDRAWING_GETALL = `${URL}/TechnicalDrawing/GetAll`;
 export const TECHNICALDRAWING_GET = `${URL}/TechnicalDrawing/Get`;
@@ -117,3 +124,10 @@ export const USER_UPDATE = `${URL}/User/Update`;
 export const USER_DELETE = `${URL}/User/Delete`;
 export const USER_GETALL = `${URL}/User/GetAll`;
 export const USER_GET = `${URL}/User/Get`;
+
+// USER_PERMISSION
+export const USER_PERMISSION_GETALL = `${URL}/UserPermission/GetAll`;
+export const USER_PERMISSION_GET = `${URL}/UserPermission/Get`;
+export const USER_PERMISSION_CREATE = `${URL}/UserPermission/Create`;
+export const USER_PERMISSION_UPDATE = `${URL}/UserPermission/Update`;
+export const USER_PERMISSION_DELETE = `${URL}/UserPermission/Delete`;

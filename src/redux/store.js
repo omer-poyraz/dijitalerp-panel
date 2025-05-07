@@ -77,6 +77,16 @@ import assemblyQualityDeleteReducer from './slices/assemblyQualityDeleteSlice'
 import technicalDrawingQualityGetAllByFailureReducer from './slices/technicalDrawingQualityGetAllByFailureSlice'
 import technicalDrawingQualityGetAllReducer from './slices/technicalDrawingQualityGetAllSlice'
 import technicalDrawingQualityDeleteReducer from './slices/technicalDrawingQualityDeleteSlice'
+import servicesGetAllReducer from './slices/servicesGetAllSlice'
+import servicesGetReducer from './slices/servicesGetSlice'
+import servicesCreateReducer from './slices/servicesCreateSlice'
+import servicesUpdateReducer from './slices/servicesUpdateSlice'
+import servicesDeleteReducer from './slices/servicesDeleteSlice'
+import userPermissionGetAllReducer from './slices/userPermissionGetAllSlice'
+import userPermissionGetReducer from './slices/userPermissionGetSlice'
+import userPermissionCreateReducer from './slices/userPermissionCreateSlice'
+import userPermissionUpdateReducer from './slices/userPermissionUpdateSlice'
+import userPermissionDeleteReducer from './slices/userPermissionDeleteSlice'
 
 export const store = configureStore({
     reducer: {
@@ -123,6 +133,11 @@ export const store = configureStore({
         employeeDelete: employeeDeleteReducer,
         lang: langReducer,
         login: loginReducer,
+        servicesGetAll: servicesGetAllReducer,
+        servicesGet: servicesGetReducer,
+        servicesCreate: servicesCreateReducer,
+        servicesUpdate: servicesUpdateReducer,
+        servicesDelete: servicesDeleteReducer,
         technicalDrawingGetAll: technicalDrawingGetAllReducer,
         technicalDrawingGet: technicalDrawingGetReducer,
         technicalDrawingCreate: technicalDrawingCreateReducer,
@@ -159,6 +174,11 @@ export const store = configureStore({
         userDelete: userDeleteReducer,
         userGetAll: userGetAllReducer,
         userGet: userGetReducer,
+        userPermissionGetAll: userPermissionGetAllReducer,
+        userPermissionGet: userPermissionGetReducer,
+        userPermissionCreate: userPermissionCreateReducer,
+        userPermissionUpdate: userPermissionUpdateReducer,
+        userPermissionDelete: userPermissionDeleteReducer,
     },
 });
 

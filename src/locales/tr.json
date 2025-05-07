@@ -89,6 +89,8 @@
     "resources": "Kaynaklar",
     "loading": "Yükleniyor...",
     "load_photo": "Fotoğraf Yükle",
+    "user_management": "Kullanıcı Yönetimi",
+    "role_management": "Rol Yönetimi",
     "quality": "Kalite Sorumlusu",
     "quality_management": "Kalite Yönetimi",
     "quality_management_desc": "Kalite yönetimi ve izleme işlemlerini buradan yapabilirsiniz.",

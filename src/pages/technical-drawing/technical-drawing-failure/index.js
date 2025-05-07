@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ERP from '../../../components/general/ERP'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Banner from '../../../components/page/Banner'
 import { fetchTechnicalDrawingGet } from '../../../redux/slices/technicalDrawingGetSlice'
@@ -25,14 +25,16 @@ const TechnicalDrawingFailurePage = () => {
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
     const dispatch = useDispatch()
+    const navigation = useNavigate()
     const [formData, setFormData] = useState({ id: 0, file: [] });
     const [formValues] = useState([
+        { label: t("inappropriateness"), col: 12, key: "inappropriateness", type: "text" },
         { label: t("operator"), col: 6, key: "operatorID", type: "select" },
         { label: t("part_code"), col: 6, key: "partCode", type: "text" },
         { label: t("pending_quantity"), col: 4, key: "productionQuantity", type: "text" },
         { label: t("date"), col: 4, key: "date", type: "date" },
         { label: t("status"), col: 4, key: "status", type: "switch" },
-        { label: t("quality_description"), col: 12, key: "quantityDescription", type: "textarea" },
+        { label: t("quality_description"), col: 12, key: "description", type: "textarea" },
     ]);
     const { id } = useParams()
 
@@ -42,8 +44,8 @@ const TechnicalDrawingFailurePage = () => {
         await dispatch(fetchTechnicalDrawingFailureGetAllByDrawing({ id: id }))
         var data = await dispatch(fetchUserGetAll({ search: "", pageNumber: 1, pageSize: 100 }))
         if (data.payload) {
-            formValues[0].options = data.payload.map((item) => ({
-                label: `${item.fistName} ${item.lastName}`,
+            formValues[1].options = data.payload.map((item) => ({
+                label: `${item.firstName} ${item.lastName}`,
                 value: item.userId
             }));
         }
@@ -67,7 +69,7 @@ const TechnicalDrawingFailurePage = () => {
                     productionQuantity: selectedData.productionQuantity,
                     date: selectedData.date,
                     status: selectedData.status,
-                    quantityDescription: selectedData.quantityDescription,
+                    description: selectedData.description,
                 });
                 setModal(true);
             }
@@ -127,6 +129,7 @@ const TechnicalDrawingFailurePage = () => {
                     t: t,
                     setSelectedItem: setSelectedItem,
                     modal: modal,
+                    navigation: navigation,
                     deleteData: deleteData,
                     setModal: setModal,
                 })}

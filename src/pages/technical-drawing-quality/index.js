@@ -4,26 +4,26 @@ import Banner from '../../components/page/Banner'
 import { useTranslation } from 'react-i18next'
 import ERPTable from '../../components/general/ERPTable'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAssemblyQualityGetAll } from '../../redux/slices/assemblyQualityGetAllSlice'
-import { fetchAssemblyQualityDelete } from '../../redux/slices/assemblyQualityDeleteSlice'
-import { columns } from '../../utilities/columns/assemblyQualityColumns'
+import { fetchTechnicalDrawingQualityGetAll } from '../../redux/slices/technicalDrawingQualityGetAllSlice'
+import { fetchTechnicalDrawingQualityDelete } from '../../redux/slices/technicalDrawingQualityDeleteSlice'
+import { columns } from '../../utilities/columns/technicalDrawingQualityColumns'
 
 const TechnicalDrawingQualityPage = () => {
     const { t } = useTranslation()
     const [modal, setModal] = useState(false)
     const [loading, setLoading] = useState(false)
-    const departments = useSelector((state) => state.assemblyQualityGetAll.data)
+    const departments = useSelector((state) => state.technicalDrawingQualityGetAll.data)
     const dispatch = useDispatch()
 
     const getData = async () => {
         setLoading(true)
-        await dispatch(fetchAssemblyQualityGetAll())
+        await dispatch(fetchTechnicalDrawingQualityGetAll())
         setLoading(false)
     }
 
     const deleteData = async (id) => {
         setLoading(true)
-        await dispatch(fetchAssemblyQualityDelete({ id: id }))
+        await dispatch(fetchTechnicalDrawingQualityDelete({ id: id }))
         await getData()
         setLoading(false)
     }

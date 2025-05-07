@@ -12,7 +12,7 @@ export const fetchAssemblyFailureCreate = createAsyncThunk(
             "partCode": formData.partCode,
             "status": Boolean(formData.status),
             "pendingQuantity": parseInt(formData.pendingQuantity),
-            "qualityDescription": formData.qualityDescription,
+            "description": formData.description,
             "date": new Date(formData.date).toISOString(),
             "assemblyManuelID": parseInt(manualId),
             "userId": userId

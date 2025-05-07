@@ -2,11 +2,11 @@ import { Popconfirm, Tooltip } from 'antd';
 import { BiEdit } from 'react-icons/bi';
 import { BsClock } from 'react-icons/bs';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
-import { MdOutlineErrorOutline } from 'react-icons/md';
+import { MdOutlineEngineering, MdOutlineErrorOutline } from 'react-icons/md';
 import { PiClockUser } from 'react-icons/pi';
 import { TbTrash } from 'react-icons/tb';
 
-export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => [
+export const columns = ({ t, navigation, setSelectedItem, modal, deleteData, setModal }) => [
     {
         title: "",
         key: "empty",
@@ -80,6 +80,14 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal }) => 
         render: (a) => {
             return (
                 <div className='d-flex justify-content-start'>
+                    <div
+                        onClick={() => navigation(`/technical-drawing/quality/${a?.id}`)}
+                        className='text-warning rounded border ml-2 p-2 cp'
+                    >
+                        <Tooltip title={t("quality_notes")}>
+                            <MdOutlineEngineering size={22} />
+                        </Tooltip>
+                    </div>
                     <div
                         onClick={() => { setSelectedItem(a?.id); setModal(!modal) }}
                         className='text-primary border ml-2 p-2 cp'

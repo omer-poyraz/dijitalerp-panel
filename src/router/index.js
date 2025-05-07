@@ -21,6 +21,7 @@ import AssemblyQualityPage from '../pages/assembly-quality';
 import AssemblyQualityManualPage from '../pages/assembly-quality/manual';
 import TechnicalDrawingQualityPage from '../pages/technical-drawing-quality';
 import TechnicalDrawingQualityDrawingPage from '../pages/technical-drawing-quality/manual';
+import RolePage from '../pages/role';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -55,6 +56,7 @@ const AnimatedRoutes = () => {
                 <Route path='/login' element={isAuth ? <HomePage /> : <LoginPage />} />
                 <Route path='/product' element={isAuth ? <ProductPage /> : <LoginPage />} />
                 <Route path='/profile' element={isAuth ? <ProfilePage /> : <LoginPage />} />
+                <Route path='/role' element={isAuth ? <RolePage /> : <LoginPage />} />
                 <Route path='/technical-drawing' element={isAuth ? <TechnicalDrawingPage /> : <LoginPage />} />
                 <Route path='/technical-drawing-success/:id' element={isAuth ? <TechnicalDrawingSuccessPage /> : <LoginPage />} />
                 <Route path='/technical-drawing-note/:id' element={isAuth ? <TechnicalDrawingNotePage /> : <LoginPage />} />

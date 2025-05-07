@@ -28,9 +28,10 @@ const TechnicalDrawingPage = () => {
         { label: t("files"), col: 6, key: "file", type: "file" },
         { label: t("project_name"), col: 6, key: "projectName", type: "text" },
         { label: t("part_code"), col: 6, key: "partCode", type: "text" },
-        { label: t("responible"), col: 6, key: "responibleID", type: "select", },
-        { label: t("person_in_charge"), col: 6, key: "personInChargeID", type: "select" },
         { label: t("serial_number"), col: 6, key: "serialNumber", type: "text" },
+        { label: t("responible"), col: 4, key: "responibleID", type: "select", },
+        { label: t("person_in_charge"), col: 4, key: "personInChargeID", type: "select" },
+        { label: t("quality_officer"), col: 4, key: "qualityOfficerID", type: "select" },
         { label: t("production_quantity"), col: 6, key: "productionQuantity", type: "number" },
         { label: t("time"), col: 6, key: "time", type: "number" },
         { label: t("date"), col: 6, key: "date", type: "date" },
@@ -44,13 +45,17 @@ const TechnicalDrawingPage = () => {
         try {
             setLoading(true);
             await dispatch(fetchTechnicalDrawingGetAll());
-            var data = await dispatch(fetchUserGetAll())
+            var data = await dispatch(fetchUserGetAll({ search: "", pageNumber: 1, pageSize: 100 }));
             if (data.payload) {
-                formValues[3].options = data.payload.map((item) => ({
+                formValues[4].options = data.payload.map((item) => ({
                     label: `${item.firstName} ${item.lastName}`,
                     value: item.userId
                 }));
-                formValues[4].options = data.payload.map((item) => ({
+                formValues[5].options = data.payload.map((item) => ({
+                    label: `${item.firstName} ${item.lastName}`,
+                    value: item.userId
+                }));
+                formValues[6].options = data.payload.map((item) => ({
                     label: `${item.firstName} ${item.lastName}`,
                     value: item.userId
                 }));
@@ -89,6 +94,7 @@ const TechnicalDrawingPage = () => {
                     partCode: data.payload.partCode,
                     responibleID: data.payload.responibleID,
                     personInChargeID: data.payload.personInChargeID,
+                    qualityOfficerID: data.payload.qualityOfficerID,
                     serialNumber: data.payload.serialNumber,
                     productionQuantity: data.payload.productionQuantity,
                     time: data.payload.time,

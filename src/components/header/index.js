@@ -103,7 +103,15 @@ const Header = () => {
         },
         { path: "/product", label: t("product") },
         { path: "/customers", label: t("customers") },
-        { path: "/user", label: t("employee") },
+        {
+            path: "/user",
+            label: t("employee"),
+            hasSubmenu: true,
+            submenuItems: [
+                { path: "/user", label: t("user_management") },
+                { path: "/role", label: t("role_management") },
+            ]
+        },
     ];
 
     const renderMenuItems = (items, parentKey = '') =>

@@ -110,6 +110,8 @@
     "load_photo": "Load Photo",
     "quality": "Quality Responsible",
     "quality_officer": "Quality Officer",
+    "user_management": "User Management",
+    "role_management": "Role Management",
     "department_management_desc": "Manage and monitor department operations here.",
     "role": "Rol",
     "total_projects": "Total Projects",

@@ -1,16 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { TechnicalDrawingNoteGetAllService } from '../../services';
+import { TechnicalDrawingQualityGetAllService } from '../../services';
 
-export const fetchTechnicalDrawingNoteGetAll = createAsyncThunk(
-    'technicalDrawingNoteGetAll/fetchTechnicalDrawingNoteGetAll',
+export const fetchTechnicalDrawingQualityGetAll = createAsyncThunk(
+    'technicalDrawingQualityGetAll/fetchTechnicalDrawingQualityGetAll',
     async () => {
-        const response = await TechnicalDrawingNoteGetAllService()
+        const response = await TechnicalDrawingQualityGetAllService()
         return response.result
     }
 );
 
-const technicalDrawingNoteGetAllSlice = createSlice({
-    name: 'technicalDrawingNoteGetAll',
+const technicalDrawingQualityGetAllSlice = createSlice({
+    name: 'technicalDrawingQualityGetAll',
     initialState: {
         data: null,
         status: 'idle',
@@ -18,17 +18,17 @@ const technicalDrawingNoteGetAllSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchTechnicalDrawingNoteGetAll.pending, (state) => {
+            .addCase(fetchTechnicalDrawingQualityGetAll.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchTechnicalDrawingNoteGetAll.fulfilled, (state, action) => {
+            .addCase(fetchTechnicalDrawingQualityGetAll.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.data = action.payload;
             })
-            .addCase(fetchTechnicalDrawingNoteGetAll.rejected, (state) => {
+            .addCase(fetchTechnicalDrawingQualityGetAll.rejected, (state) => {
                 state.status = 'failed';
             });
     },
 });
 
-export default technicalDrawingNoteGetAllSlice.reducer;
+export default technicalDrawingQualityGetAllSlice.reducer;

@@ -28,12 +28,13 @@ const AssemblyFailurePage = () => {
     const navigation = useNavigate()
     const [formData, setFormData] = useState({ id: 0, file: [] });
     const [formValues] = useState([
+        { label: t("inappropriateness"), col: 12, key: "inappropriateness", type: "text" },
         { label: t("technician"), col: 6, key: "technicianID", type: "select" },
         { label: t("part_code"), col: 6, key: "partCode", type: "text" },
         { label: t("pending_quantity"), col: 4, key: "pendingQuantity", type: "text" },
         { label: t("date"), col: 4, key: "date", type: "date" },
         { label: t("status"), col: 4, key: "status", type: "switch" },
-        { label: t("quality_description"), col: 12, key: "qualityDescription", type: "textarea" },
+        { label: t("quality_description"), col: 12, key: "description", type: "textarea" },
     ]);
     const { id } = useParams()
 
@@ -43,7 +44,7 @@ const AssemblyFailurePage = () => {
         await dispatch(fetchAssemblyFailureGetAllByManual({ id: id }))
         var data = await dispatch(fetchUserGetAll({ search: "", pageNumber: 1, pageSize: 100 }))
         if (data.payload) {
-            formValues[0].options = data.payload.map((item) => ({
+            formValues[1].options = data.payload.map((item) => ({
                 label: `${item.firstName} ${item.lastName}`,
                 value: item.userId
             }));
@@ -68,7 +69,7 @@ const AssemblyFailurePage = () => {
                     pendingQuantity: selectedData.pendingQuantity,
                     date: selectedData.date,
                     status: selectedData.status,
-                    qualityDescription: selectedData.qualityDescription,
+                    description: selectedData.description,
                 });
                 setModal(true);
             }
