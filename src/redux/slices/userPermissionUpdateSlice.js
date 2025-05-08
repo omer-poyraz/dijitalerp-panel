@@ -4,15 +4,13 @@ import { UserPermissionUpdateService } from '../../services';
 export const fetchUserPermissionUpdate = createAsyncThunk(
     'userPermissionUpdate/fetchUserPermissionUpdate',
     async ({ formData, id }) => {
-        const userId = localStorage.getItem("auth") === null ? null : JSON.parse(localStorage.getItem("auth")).user?.userId
-
         const data = {
             "serviceName": formData.serviceName,
             "canRead": formData.canRead,
             "canWrite": formData.canWrite,
             "canDelete": formData.canDelete,
             "id": id,
-            "userId": userId,
+            "userId": formData.userId,
         }
 
         const response = await UserPermissionUpdateService(data)

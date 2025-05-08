@@ -25,7 +25,6 @@ import RolePage from '../pages/role';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
-    const [load, setLoad] = useState(false)
     const [isAuth, setIsAuth] = useState(false)
 
     useEffect(() => {
@@ -35,9 +34,6 @@ const AnimatedRoutes = () => {
             if (auth.accessToken) setIsAuth(true)
             else setIsAuth(false)
         }
-        setTimeout(() => {
-            setLoad(true)
-        }, 500)
     }, [])
 
     return (

@@ -155,7 +155,6 @@ export const store = configureStore({
         technicalDrawingNoteCreate: technicalDrawingNoteCreateReducer,
         technicalDrawingNoteUpdate: technicalDrawingNoteUpdateReducer,
         technicalDrawingNoteDelete: technicalDrawingNoteDeleteReducer,
-        technicalDrawingNoteDelete: technicalDrawingNoteDeleteReducer,
         technicalDrawingVisualNoteDelete: technicalDrawingVisualNoteDeleteReducer,
         technicalDrawingVisualNoteGetAllByDrawing: technicalDrawingVisualNoteGetAllByDrawingReducer,
         technicalDrawingVisualNoteGet: technicalDrawingVisualNoteGetReducer,

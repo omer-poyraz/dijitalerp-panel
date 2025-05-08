@@ -8,7 +8,7 @@ import { fetchUserPermissionGetAll } from '../../redux/slices/userPermissionGetA
 import { fetchUserPermissionCreate } from '../../redux/slices/userPermissionCreateSlice';
 import { fetchUserPermissionUpdate } from '../../redux/slices/userPermissionUpdateSlice';
 
-const { Title } = Typography;
+const { Title, Paragraph } = Typography;
 
 const RolePage = () => {
     const dispatch = useDispatch();
@@ -42,6 +42,7 @@ const RolePage = () => {
             if (!permission) {
                 const formData = {
                     serviceName,
+                    userId: userId,
                     canRead: type === 'canRead' ? checked : false,
                     canWrite: type === 'canWrite' ? checked : false,
                     canDelete: type === 'canDelete' ? checked : false,
@@ -50,6 +51,7 @@ const RolePage = () => {
             } else {
                 const formData = {
                     serviceName,
+                    userId: userId,
                     canRead: type === 'canRead' ? checked : permission.canRead,
                     canWrite: type === 'canWrite' ? checked : permission.canWrite,
                     canDelete: type === 'canDelete' ? checked : permission.canDelete,
@@ -64,13 +66,7 @@ const RolePage = () => {
         setLoading(false);
     };
 
-    if (
-        usersStatus === 'loading' ||
-        servicesStatus === 'loading' ||
-        permissionsStatus === 'loading' ||
-        !users ||
-        !services
-    ) {
+    if (usersStatus === 'loading' || servicesStatus === 'loading' || permissionsStatus === 'loading' || !users || !services) {
         return (
             <ERP>
                 <div style={{ minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -82,7 +78,8 @@ const RolePage = () => {
 
     return (
         <ERP>
-            <Title level={3} style={{ textAlign: 'center', marginBottom: 32 }}>Rol Yönetimi</Title>
+            <Title level={3} style={{ textAlign: 'left', marginBottom: 5 }}>Rol Yönetimi</Title>
+            <Paragraph level={3} style={{ textAlign: 'left', marginBottom: 32 }}>Kullanıcılara ait rolleri buradan güncelleyebilirsiniz.</Paragraph>
             <div style={{ overflowX: 'auto' }}>
                 <Table
                     dataSource={users}
@@ -92,7 +89,7 @@ const RolePage = () => {
                     scroll={{ x: true }}
                     columns={[
                         {
-                            title: 'Kullanıcı',
+                            title: '',
                             dataIndex: 'firstName',
                             key: 'firstName',
                             fixed: 'left',
@@ -104,58 +101,65 @@ const RolePage = () => {
                                 </div>
                             ),
                         },
-                        ...services.map(service => ({
-                            title: (
-                                <div style={{ minWidth: 140, textAlign: 'center' }}>
-                                    <div style={{ fontWeight: 600 }}>{service.displayName || service.serviceName}</div>
-                                    <div style={{ fontSize: 11, color: '#888' }}>
-                                        <span style={{ margin: '0 6px' }}>Oku</span>
-                                        <span style={{ margin: '0 6px' }}>Yaz</span>
-                                        <span style={{ margin: '0 6px' }}>Sil</span>
-                                    </div>
-                                </div>
-                            ),
-                            dataIndex: service.serviceName,
-                            key: service.serviceName,
-                            align: 'center',
-                            render: (_, user) => {
-                                const permission = getPermission(user.id, service.serviceName) || {};
-                                return (
-                                    <Row gutter={4} justify="center" align="middle">
-                                        <Col>
-                                            <Switch
-                                                size="small"
-                                                checked={!!permission.canRead}
-                                                loading={loading}
-                                                onChange={checked =>
-                                                    handlePermissionChange(user.id, service.serviceName, 'canRead', checked)
-                                                }
-                                            />
-                                        </Col>
-                                        <Col>
-                                            <Switch
-                                                size="small"
-                                                checked={!!permission.canWrite}
-                                                loading={loading}
-                                                onChange={checked =>
-                                                    handlePermissionChange(user.id, service.serviceName, 'canWrite', checked)
-                                                }
-                                            />
-                                        </Col>
-                                        <Col>
-                                            <Switch
-                                                size="small"
-                                                checked={!!permission.canDelete}
-                                                loading={loading}
-                                                onChange={checked =>
-                                                    handlePermissionChange(user.id, service.serviceName, 'canDelete', checked)
-                                                }
-                                            />
-                                        </Col>
-                                    </Row>
-                                );
-                            },
-                        })),
+                        ...services.map(service => {
+                            console.log(service)
+                            return (
+                                {
+                                    title: (
+                                        <div style={{ minWidth: 140, textAlign: 'center' }}>
+                                            <div style={{ fontWeight: 600, marginBottom: 10 }}>{service.name}</div>
+                                            <div style={{ fontSize: 11, color: '#888' }}>
+                                                <span style={{ margin: '0 6px' }}>Oku</span>
+                                                <span style={{ margin: '0 6px' }}>Yaz</span>
+                                                <span style={{ margin: '0 6px' }}>Sil</span>
+                                            </div>
+                                        </div>
+                                    ),
+                                    dataIndex: service.name,
+                                    key: service.name,
+                                    align: 'center',
+                                    render: (_, user) => {
+                                        const permission = getPermission(user.userId, service.name) || {};
+                                        console.log(permission)
+                                        console.log(user.userId, service.name)
+                                        return (
+                                            <Row gutter={4} justify="center" align="middle">
+                                                <Col>
+                                                    <Switch
+                                                        size="small"
+                                                        checked={!!permission.canRead}
+                                                        loading={loading}
+                                                        onChange={checked =>
+                                                            handlePermissionChange(user.userId, service.name, 'canRead', checked)
+                                                        }
+                                                    />
+                                                </Col>
+                                                <Col>
+                                                    <Switch
+                                                        size="small"
+                                                        checked={!!permission.canWrite}
+                                                        loading={loading}
+                                                        onChange={checked =>
+                                                            handlePermissionChange(user.userId, service.name, 'canWrite', checked)
+                                                        }
+                                                    />
+                                                </Col>
+                                                <Col>
+                                                    <Switch
+                                                        size="small"
+                                                        checked={!!permission.canDelete}
+                                                        loading={loading}
+                                                        onChange={checked =>
+                                                            handlePermissionChange(user.userId, service.name, 'canDelete', checked)
+                                                        }
+                                                    />
+                                                </Col>
+                                            </Row>
+                                        );
+                                    },
+                                }
+                            )
+                        }),
                     ]}
                 />
             </div>
