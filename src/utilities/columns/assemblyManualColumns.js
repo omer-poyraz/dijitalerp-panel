@@ -1,6 +1,6 @@
 import { Popconfirm, Tooltip } from 'antd';
 import { BiEdit } from 'react-icons/bi';
-import { BsClock } from 'react-icons/bs';
+import { BsClock, BsEye } from 'react-icons/bs';
 import { FaFile } from 'react-icons/fa';
 import { PiClockUser } from 'react-icons/pi';
 import { TbTrash } from 'react-icons/tb';
@@ -8,7 +8,7 @@ import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { MdOutlineErrorOutline, MdOutlineSpeakerNotes } from "react-icons/md";
 import { IoCameraOutline } from "react-icons/io5";
 
-export const columns = ({ t, setSelectedItem, modal, deleteData, setModal, navigation }) => [
+export const columns = ({ t, setSelectedItem, modal, deleteData, setModal, setViewModal, navigation }) => [
     {
         title: "",
         key: "empty",
@@ -113,6 +113,14 @@ export const columns = ({ t, setSelectedItem, modal, deleteData, setModal, navig
                     >
                         <Tooltip title={t("virtual_notes")}>
                             <IoCameraOutline size={22} />
+                        </Tooltip>
+                    </div>
+                    <div
+                        onClick={() => { setSelectedItem(a?.id); setViewModal(true) }}
+                        className='text-info rounded border ml-2 p-2 cp'
+                    >
+                        <Tooltip title={t("view")}>
+                            <BsEye size={22} />
                         </Tooltip>
                     </div>
                     <div className='text-danger rounded border ml-2 rounded p-2 cp'>

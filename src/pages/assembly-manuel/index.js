@@ -14,6 +14,8 @@ import { fetchAssemblyManualGet } from '../../redux/slices/assemblyManualGetSlic
 import { fetchAssemblyManualUpdate } from '../../redux/slices/assemblyManualUpdateSlice';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserGetAll } from '../../redux/slices/userGetAllSlice';
+import { Modal, ModalBody, ModalHeader } from 'reactstrap';
+import AssemblyManualView from './view';
 
 const AssemblyManuelPage = () => {
     const { t } = useTranslation();
@@ -22,7 +24,9 @@ const AssemblyManuelPage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+    const [viewModal, setViewModal] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedData, setSelectedData] = useState(null);
     const [formData, setFormData] = useState({ id: 0, file: [] });
     const [formValues] = useState([
         { label: t("files"), col: 6, key: "file", type: "file" },
@@ -134,8 +138,12 @@ const AssemblyManuelPage = () => {
         setFormData({ id: 0, file: [] });
     }
 
+    const selectedItemData = async () => { 
+        await dispatch(fetchAssemblyManualGet({ id: selectedItem }));
+    }
+
     useEffect(() => { getData(); }, [dispatch]);
-    useEffect(() => { findData() }, [selectedItem])
+    useEffect(() => { selectedItemData(); findData() }, [selectedItem])
 
     return (
         <ERP>
@@ -160,6 +168,7 @@ const AssemblyManuelPage = () => {
                     deleteData: deleteData,
                     setModal: setModal,
                     navigation: navigation,
+                    setViewModal: setViewModal,
                 })}
                 loading={loading}
             />
@@ -171,6 +180,12 @@ const AssemblyManuelPage = () => {
                 formData={formData}
                 handleSubmit={handleSubmit}
                 formValues={formValues}
+            />
+
+            <AssemblyManualView
+                viewModal={viewModal}
+                setViewModal={setViewModal}
+                data={assemblyManuals?.find((item) => item.id === selectedItem)}
             />
         </ERP>
     );

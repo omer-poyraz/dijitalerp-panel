@@ -14,6 +14,7 @@ import { fetchTechnicalDrawingGet } from '../../redux/slices/technicalDrawingGet
 import { fetchTechnicalDrawingUpdate } from '../../redux/slices/technicalDrawingUpdateSlice';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserGetAll } from '../../redux/slices/userGetAllSlice';
+import TechnicalDrawingView from './view';
 
 const TechnicalDrawingPage = () => {
     const { t } = useTranslation();
@@ -21,6 +22,7 @@ const TechnicalDrawingPage = () => {
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [viewModal, setViewModal] = useState(false);
     const [success, setSuccess] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);
     const [formData, setFormData] = useState({ id: 0, file: [] });
@@ -134,8 +136,12 @@ const TechnicalDrawingPage = () => {
         setFormData({ id: 0, file: [] });
     }
 
+    const selectedItemData = async () => {
+        await dispatch(fetchTechnicalDrawingGet({ id: selectedItem }));
+    }
+
     useEffect(() => { getData(); }, [dispatch]);
-    useEffect(() => { findData() }, [selectedItem])
+    useEffect(() => { selectedItemData(); findData() }, [selectedItem])
 
     return (
         <ERP>
@@ -160,6 +166,7 @@ const TechnicalDrawingPage = () => {
                     deleteData: deleteData,
                     setModal: setModal,
                     navigation: navigation,
+                    setViewModal: setViewModal,
                 })}
                 loading={loading}
             />
@@ -171,6 +178,12 @@ const TechnicalDrawingPage = () => {
                 formData={formData}
                 handleSubmit={handleSubmit}
                 formValues={formValues}
+            />
+
+            <TechnicalDrawingView
+                viewModal={viewModal}
+                setViewModal={setViewModal}
+                data={technicalDrawings?.find((item) => item.id === selectedItem)}
             />
         </ERP>
     );

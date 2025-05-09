@@ -85,18 +85,18 @@ const Header = () => {
                 {
                     path: "/assembly-manual",
                     label: t("assembly_manual"),
-                    hasSubmenu: true,
-                    submenuItems: [
-                        { path: "/assembly-manual/quality", label: t("quality_management") },
-                    ]
+                    // hasSubmenu: true,
+                    // submenuItems: [
+                    //     { path: "/assembly-manual/quality", label: t("quality_management") },
+                    // ]
                 },
                 {
                     path: "/technical-drawing",
                     label: t("technical_drawing"),
-                    hasSubmenu: true,
-                    submenuItems: [
-                        { path: "/technical-drawing/quality", label: t("quality_management") },
-                    ]
+                    // hasSubmenu: true,
+                    // submenuItems: [
+                    //     { path: "/technical-drawing/quality", label: t("quality_management") },
+                    // ]
                 },
                 { path: "/department", label: t("department") },
             ]
