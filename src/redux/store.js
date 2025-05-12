@@ -29,6 +29,34 @@ import assemblyVisualNoteCreateReducer from './slices/assemblyVisualNoteCreateSl
 import assemblyVisualNoteGetReducer from './slices/assemblyVisualNoteGetSlice'
 import assemblyVisualNoteGetAllByDrawingReducer from './slices/assemblyVisualNoteGetAllByDrawingSlice'
 import assemblyVisualNoteDeleteReducer from './slices/assemblyVisualNoteDeleteSlice'
+import cmmGetAllReducer from './slices/cmmGetAllSlice'
+import cmmGetReducer from './slices/cmmGetSlice'
+import cmmCreateReducer from './slices/cmmCreateSlice'
+import cmmUpdateReducer from './slices/cmmUpdateSlice'
+import cmmDeleteReducer from './slices/cmmDeleteSlice'
+import cmmFailureGetAllReducer from './slices/cmmFailureGetAllSlice'
+import cmmFailureGetAllByManualReducer from './slices/cmmFailureGetAllByManualSlice'
+import cmmFailureGetReducer from './slices/cmmFailureGetSlice'
+import cmmFailureCreateReducer from './slices/cmmFailureCreateSlice'
+import cmmFailureUpdateReducer from './slices/cmmFailureUpdateSlice'
+import cmmFailureDeleteReducer from './slices/cmmFailureDeleteSlice'
+import cmmModuleGetAllReducer from './slices/cmmModuleGetAllSlice'
+import cmmModuleGetReducer from './slices/cmmModuleGetSlice'
+import cmmModuleCreateReducer from './slices/cmmModuleCreateSlice'
+import cmmModuleUpdateReducer from './slices/cmmModuleUpdateSlice'
+import cmmModuleDeleteReducer from './slices/cmmModuleDeleteSlice'
+import cmmSuccessGetAllReducer from './slices/cmmSuccessGetAllSlice'
+import cmmSuccessGetAllByManualReducer from './slices/cmmSuccessGetAllByManualSlice'
+import cmmSuccessGetReducer from './slices/cmmSuccessGetSlice'
+import cmmSuccessCreateReducer from './slices/cmmSuccessCreateSlice'
+import cmmSuccessUpdateReducer from './slices/cmmSuccessUpdateSlice'
+import cmmSuccessDeleteReducer from './slices/cmmSuccessDeleteSlice'
+import cmmNoteGetAllReducer from './slices/cmmNoteGetAllSlice'
+import cmmNoteGetAllByManualReducer from './slices/cmmNoteGetAllByManualSlice'
+import cmmNoteGetReducer from './slices/cmmNoteGetSlice'
+import cmmNoteCreateReducer from './slices/cmmNoteCreateSlice'
+import cmmNoteUpdateReducer from './slices/cmmNoteUpdateSlice'
+import cmmNoteDeleteReducer from './slices/cmmNoteDeleteSlice'
 import employeeGetAllReducer from './slices/employeeGetAllSlice'
 import employeeGetReducer from './slices/employeeGetSlice'
 import employeeCreateReducer from './slices/employeeCreateSlice'
@@ -121,6 +149,34 @@ export const store = configureStore({
         assemblyQualityGetAllByFailure: assemblyQualityGetAllByFailureReducer,
         assemblyQualityGetAll: assemblyQualityGetAllReducer,
         assemblyQualityDelete: assemblyQualityDeleteReducer,
+        cmmGetAll: cmmGetAllReducer,
+        cmmGet: cmmGetReducer,
+        cmmCreate: cmmCreateReducer,
+        cmmUpdate: cmmUpdateReducer,
+        cmmDelete: cmmDeleteReducer,
+        cmmModuleGetAll: cmmModuleGetAllReducer,
+        cmmModuleGet: cmmModuleGetReducer,
+        cmmModuleCreate: cmmModuleCreateReducer,
+        cmmModuleUpdate: cmmModuleUpdateReducer,
+        cmmModuleDelete: cmmModuleDeleteReducer,
+        cmmFailureGetAll: cmmFailureGetAllReducer,
+        cmmFailureGetAllByManual: cmmFailureGetAllByManualReducer,
+        cmmFailureGet: cmmFailureGetReducer,
+        cmmFailureCreate: cmmFailureCreateReducer,
+        cmmFailureUpdate: cmmFailureUpdateReducer,
+        cmmFailureDelete: cmmFailureDeleteReducer,
+        cmmSuccessGetAll: cmmSuccessGetAllReducer,
+        cmmSuccessGetAllByManual: cmmSuccessGetAllByManualReducer,
+        cmmSuccessGet: cmmSuccessGetReducer,
+        cmmSuccessCreate: cmmSuccessCreateReducer,
+        cmmSuccessUpdate: cmmSuccessUpdateReducer,
+        cmmSuccessDelete: cmmSuccessDeleteReducer,
+        cmmNoteGetAll: cmmNoteGetAllReducer,
+        cmmNoteGetAllByManual: cmmNoteGetAllByManualReducer,
+        cmmNoteGet: cmmNoteGetReducer,
+        cmmNoteCreate: cmmNoteCreateReducer,
+        cmmNoteUpdate: cmmNoteUpdateReducer,
+        cmmNoteDelete: cmmNoteDeleteReducer,
         departmentGetAll: departmentGetAllReducer,
         departmentGet: departmentGetReducer,
         departmentCreate: departmentCreateReducer,

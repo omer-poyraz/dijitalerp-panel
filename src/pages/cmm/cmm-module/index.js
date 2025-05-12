@@ -1,75 +1,54 @@
 import { useEffect, useState } from 'react'
 import ERP from '../../../components/general/ERP'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Banner from '../../../components/page/Banner'
-import { fetchAssemblyManualGet } from '../../../redux/slices/assemblyManualGetSlice'
+import { fetchCMMGet } from '../../../redux/slices/cmmGetSlice'
 import ERPTable from '../../../components/general/ERPTable'
-import { fetchAssemblyFailureGetAllByManual } from '../../../redux/slices/assemblyFailureGetAllByManualSlice'
-import { columns } from '../../../utilities/columns/assemblyFailureColumns'
 import { useTranslation } from 'react-i18next'
-import { fetchAssemblyFailureDelete } from '../../../redux/slices/assemblyFailureDeleteSlice'
 import ERPForm from '../../../components/page/ERPForm'
-import { fetchAssemblyFailureCreate } from '../../../redux/slices/assemblyFailureCreateSlice'
-import { fetchAssemblyFailureUpdate } from '../../../redux/slices/assemblyFailureUpdateSlice'
 import Alerts from '../../../components/page/Alert'
-import { fetchUserGetAll } from '../../../redux/slices/userGetAllSlice'
+import { columns } from '../../../utilities/columns/cmmModuleColumns'
+import { fetchCMMModuleDelete } from '../../../redux/slices/cmmModuleDeleteSlice'
+import { fetchCMMModuleCreate } from '../../../redux/slices/cmmModuleCreateSlice'
+import { fetchCMMModuleUpdate } from '../../../redux/slices/cmmModuleUpdateSlice'
+import { fetchCMMModuleGetAll } from '../../../redux/slices/cmmModuleGetAllSlice'
 
-const AssemblyFailurePage = () => {
+const CMMModulePage = () => {
     const { t } = useTranslation()
-    const assemblyManual = useSelector((state) => state.assemblyManualGet.data)
-    const assemblyFailures = useSelector((state) => state.assemblyFailureGetAllByManual.data)
+    const cmmModules = useSelector((state) => state.cmmModuleGetAll.data)
     const [selectedItem, setSelectedItem] = useState(null)
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
     const dispatch = useDispatch()
-    const navigation = useNavigate()
-    const [formData, setFormData] = useState({ id: 0, file: [] });
+    const [formData, setFormData] = useState({ id: 0, file: [], status: false });
     const [formValues] = useState([
-        { label: t("inappropriateness"), col: 12, key: "inappropriateness", type: "text" },
-        { label: t("technician"), col: 6, key: "technicianID", type: "select" },
-        { label: t("part_code"), col: 6, key: "partCode", type: "text" },
-        { label: t("pending_quantity"), col: 4, key: "pendingQuantity", type: "text" },
-        { label: t("date"), col: 4, key: "date", type: "date" },
-        { label: t("status"), col: 4, key: "status", type: "switch" },
-        { label: t("quality_description"), col: 12, key: "description", type: "textarea" },
+        { label: t("file"), col: 6, key: "file", type: "file" },
+        { label: t("cmm"), col: 6, key: "CMM", type: "text" },
     ]);
     const { id } = useParams()
 
     const getData = async () => {
         setLoading(true)
-        await dispatch(fetchAssemblyManualGet({ id: id }))
-        await dispatch(fetchAssemblyFailureGetAllByManual({ id: id }))
-        var data = await dispatch(fetchUserGetAll({ search: "", pageNumber: 1, pageSize: 100 }))
-        if (data.payload) {
-            formValues[1].options = data.payload.map((item) => ({
-                label: `${item.firstName} ${item.lastName}`,
-                value: item.userId
-            }));
-        }
+        await dispatch(fetchCMMModuleGetAll())
         setLoading(false)
     }
 
     const deleteData = async (id) => {
-        await dispatch(fetchAssemblyFailureDelete({ id: id }))
+        await dispatch(fetchCMMModuleDelete({ id: id }))
         await getData()
     }
 
     const findData = async () => {
         if (selectedItem) {
-            const selectedData = assemblyFailures.find((item) => item.id === selectedItem);
+            const selectedData = cmmModules.find((item) => item.id === selectedItem);
             if (selectedData) {
                 setFormData({
                     id: selectedData.id,
-                    inappropriateness: selectedData.inappropriateness,
-                    technicianID: selectedData.technicianID,
-                    partCode: selectedData.partCode,
-                    pendingQuantity: selectedData.pendingQuantity,
-                    date: selectedData.date,
-                    status: selectedData.status,
-                    description: selectedData.description,
+                    file: selectedData.file,
+                    cmm: selectedData.cmm,
                 });
                 setModal(true);
             }
@@ -84,14 +63,17 @@ const AssemblyFailurePage = () => {
         setLoading(true);
         try {
             if (!selectedItem) {
+                if (formData.status === null || formData.status === undefined) {
+                    setFormData({ ...formData, status: false });
+                }
                 setLoading(true);
-                await dispatch(fetchAssemblyFailureCreate({ formData: formData, manualId: id }));
+                await dispatch(fetchCMMModuleCreate({ formData: formData, manualId: id }));
                 await getData();
                 setSuccess(t('add_success'));
                 setTimeout(() => setSuccess(null), 5000);
             } else {
                 setLoading(true);
-                await dispatch(fetchAssemblyFailureUpdate({ formData: formData, id: selectedItem, manualId: id }));
+                await dispatch(fetchCMMModuleUpdate({ formData: formData, id: selectedItem, manualId: id }));
                 await getData();
                 setSuccess(t('update_success'));
                 setTimeout(() => setSuccess(null), 5000);
@@ -114,8 +96,8 @@ const AssemblyFailurePage = () => {
             <Banner
                 modal={modal}
                 setModal={setModal}
-                title={assemblyManual?.projectName}
-                description={t("project_error_desc")}
+                title={t("cmm_module")}
+                description={t("project_note_desc")}
             />
 
             <Alerts
@@ -124,12 +106,11 @@ const AssemblyFailurePage = () => {
             />
 
             <ERPTable
-                data={assemblyFailures}
+                data={cmmModules}
                 columns={columns({
                     t: t,
                     setSelectedItem: setSelectedItem,
                     modal: modal,
-                    navigation: navigation,
                     deleteData: deleteData,
                     setModal: setModal,
                 })}
@@ -148,4 +129,4 @@ const AssemblyFailurePage = () => {
     )
 }
 
-export default AssemblyFailurePage
+export default CMMModulePage

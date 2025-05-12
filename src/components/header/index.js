@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import logo from '../../images/logo2.png';
 import logo2 from '../../images/logo3.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -82,23 +82,17 @@ const Header = () => {
             label: t("resources"),
             hasSubmenu: true,
             submenuItems: [
-                {
-                    path: "/assembly-manual",
-                    label: t("assembly_manual"),
-                    // hasSubmenu: true,
-                    // submenuItems: [
-                    //     { path: "/assembly-manual/quality", label: t("quality_management") },
-                    // ]
-                },
-                {
-                    path: "/technical-drawing",
-                    label: t("technical_drawing"),
-                    // hasSubmenu: true,
-                    // submenuItems: [
-                    //     { path: "/technical-drawing/quality", label: t("quality_management") },
-                    // ]
-                },
+                { path: "/assembly-manual", label: t("assembly_manual"), },
+                { path: "/technical-drawing", label: t("technical_drawing"), },
                 { path: "/department", label: t("department") },
+                {
+                    path: "/cmm",
+                    label: t("cmm"),
+                    hasSubmenu: true,
+                    submenuItems: [
+                        { path: "/cmm-list", label: t("cmm_list") },
+                    ]
+                },
             ]
         },
         { path: "/product", label: t("product") },

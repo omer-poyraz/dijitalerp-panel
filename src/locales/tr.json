@@ -73,7 +73,7 @@
     "deleting": "Siliniyor...",
     "confirm_delete": "Silmeyi Onayla",
     "delete_confirmation_message": "Bu öğeyi silmek istediğinize emin misiniz? Bu işlem geri alınamaz.",
-    "field":"Alan",
+    "field": "Alan",
     "field_required": "Bu alan zorunludur",
     "must_be_number": "Bu alan bir sayı olmalıdır",
     "add_success": "Öğe başarıyla eklendi",
@@ -100,7 +100,10 @@
     "notes": "Notlar",
     "virtual_notes": "Görsel Notlar",
     "quality_notes": "Kalite Notları",
+    "stand": "Tezgah",
+    "solid_model": "Katı Model",
     "quality_officer": "Kalite Sorumlusu",
+    "total": "Toplam",
     "appropriate": "Uygunluk",
     "technician": "Teknisyen",
     "operator": "Operatör",
@@ -136,5 +139,11 @@
     "project_error_desc": "Projede başarısız olanların listesini buradan takip edebilirsiniz.",
     "employee_management": "Personel Yönetimi",
     "employee_management_desc": "Personel yönetimi ve izleme işlemlerini buradan yapabilirsiniz.",
-    "employee": "Personel"
+    "employee": "Personel",
+    "cmm": "CMM",
+    "cmm_desc": "CMM yönetimi ve izleme işlemlerini buradan yapabilirsiniz.",
+    "cmm_list": "CMM Listesi",
+    "install_result_date": "Kurulum Sonuç Tarihi",
+    "measuring_person": "Ölçüm Yapan Kişi",
+    "cmm_module": "CMM Modül"
 }

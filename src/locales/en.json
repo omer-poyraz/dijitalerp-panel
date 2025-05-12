@@ -98,6 +98,7 @@
     "choose_files": "Choose files",
     "clear_filters": "Clear filters",
     "total_manuals": "Total Manuals",
+    "total": "Total",
     "inappropriateness": "Inappropriateness",
     "appropriate": "Appropriate",
     "notes": "Notes",
@@ -112,6 +113,8 @@
     "quality_officer": "Quality Officer",
     "user_management": "User Management",
     "role_management": "Role Management",
+    "stand": "Stand",
+    "solid_model": "Solid Model",
     "department_management_desc": "Manage and monitor department operations here.",
     "role": "Rol",
     "total_projects": "Total Projects",
@@ -136,5 +139,11 @@
     "project_error_desc": "You can follow the list of those who failed the project here.",
     "employee_management": "Employee Management",
     "employee_management_desc": "Manage your employees and their roles",
-    "employee": "Employee"
+    "employee": "Employee",
+    "cmm": "CMM",
+    "cmm_desc": "Manage and monitor CMM operations here.",
+    "cmm_list": "CMM List",
+    "install_result_date": "Installation Result Date",
+    "measuring_person": "Measuring Person",
+    "cmm_module": "CMM Module"
 }

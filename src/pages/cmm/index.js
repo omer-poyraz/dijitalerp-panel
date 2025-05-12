@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAssemblyManualGetAll } from '../../redux/slices/assemblyManualGetAllSlice';
+import { fetchCMMGetAll } from '../../redux/slices/cmmGetAllSlice';
 import ERP from '../../components/general/ERP';
 import Banner from '../../components/page/Banner';
 import Alerts from '../../components/page/Alert';
 import ERPForm from '../../components/page/ERPForm';
-import { fetchAssemblyManualCreate } from '../../redux/slices/assemblyManualCreateSlice';
+import { fetchCMMCreate } from '../../redux/slices/cmmCreateSlice';
 import ERPTable from '../../components/general/ERPTable';
-import { columns } from '../../utilities/columns/assemblyManualColumns';
-import { fetchAssemblyManualDelete } from '../../redux/slices/assemblyManualDeleteSlice';
-import { fetchAssemblyManualGet } from '../../redux/slices/assemblyManualGetSlice';
-import { fetchAssemblyManualUpdate } from '../../redux/slices/assemblyManualUpdateSlice';
+import { columns } from '../../utilities/columns/cmmColumns';
+import { fetchCMMDelete } from '../../redux/slices/cmmDeleteSlice';
+import { fetchCMMGet } from '../../redux/slices/cmmGetSlice';
+import { fetchCMMUpdate } from '../../redux/slices/cmmUpdateSlice';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserGetAll } from '../../redux/slices/userGetAllSlice';
-import AssemblyManualView from './view';
+import CMMView from './view';
+import { fetchCMMModuleGetAll } from '../../redux/slices/cmmModuleGetAllSlice';
 
-const AssemblyManuelPage = () => {
+const CMMPage = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const [modal, setModal] = useState(false);
@@ -25,41 +26,55 @@ const AssemblyManuelPage = () => {
     const [success, setSuccess] = useState(null);
     const [viewModal, setViewModal] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
-    const [formData, setFormData] = useState({ id: 0, file: [] });
+    const [formData, setFormData] = useState({ id: 0, file: [], resultFile: [] });
     const [formValues] = useState([
         { label: t("files"), col: 6, key: "file", type: "file" },
-        { label: t("project_name"), col: 6, key: "projectName", type: "text" },
-        { label: t("part_code"), col: 6, key: "partCode", type: "text" },
-        { label: t("serial_number"), col: 6, key: "serialNumber", type: "text" },
-        { label: t("quality_officer"), col: 4, key: "qualityOfficerID", type: "select" },
-        { label: t("person_in_charge"), col: 4, key: "personInChargeID", type: "select" },
-        { label: t("responible"), col: 4, key: "responibleID", type: "select", },
-        { label: t("production_quantity"), col: 6, key: "productionQuantity", type: "number" },
-        { label: t("time"), col: 6, key: "time", type: "number" },
-        { label: t("date"), col: 6, key: "date", type: "date" },
-        { label: t("technician_date"), col: 6, key: "technicianDate", type: "date" },
-        { label: t("description"), col: 12, key: "description", type: "textarea" },
+        { label: t("files"), col: 6, key: "resultFile", type: "file" },
+        { label: t("project_name"), col: 6, key: "ProjectName", type: "text" },
+        { label: t("part_code"), col: 6, key: "PartCode", type: "text" },
+        { label: t("stand"), col: 6, key: "Stand", type: "text" },
+        { label: t("time"), col: 6, key: "Time", type: "number" },
+        { label: t("date"), col: 6, key: "Date", type: "date" },
+        { label: t("install_result_date"), col: 6, key: "InstallResultDate", type: "date" },
+        { label: t("solid_model"), col: 6, key: "SolidModel", type: "text" },
+        { label: t("description"), col: 6, key: "Description", type: "text" },
+        { label: t("measuring_person"), col: 4, key: "MeasuringPersonID", type: "select" },
+        { label: t("cmm_module"), col: 4, key: "CMMModuleID", type: "select" },
+        { label: t("responible"), col: 4, key: "ResponibleID", type: "select", },
+        { label: t("person_in_charge"), col: 4, key: "PersonInChargeID", type: "select", },
+        { label: t("quality_officer"), col: 6, key: "QualityOfficerID", type: "select" },
     ]);
-    const assemblyManuals = useSelector((state) => state.assemblyManualGetAll.data);
+    const cmms = useSelector((state) => state.cmmGetAll.data);
     const navigation = useNavigate()
 
     const getData = async () => {
         try {
             setLoading(true);
-            await dispatch(fetchAssemblyManualGetAll());
+            await dispatch(fetchCMMGetAll());
             var data = await dispatch(fetchUserGetAll({ search: "", pageNumber: 1, pageSize: 100 }));
+            var modules = await dispatch(fetchCMMModuleGetAll())
             if (data.payload) {
-                formValues[4].options = data.payload.map((item) => ({
+                formValues[10].options = data.payload.map((item) => ({
                     label: `${item.firstName} ${item.lastName}`,
                     value: item.userId
                 }));
-                formValues[5].options = data.payload.map((item) => ({
+                formValues[12].options = data.payload.map((item) => ({
                     label: `${item.firstName} ${item.lastName}`,
                     value: item.userId
                 }));
-                formValues[6].options = data.payload.map((item) => ({
+                formValues[13].options = data.payload.map((item) => ({
                     label: `${item.firstName} ${item.lastName}`,
                     value: item.userId
+                }));
+                formValues[14].options = data.payload.map((item) => ({
+                    label: `${item.firstName} ${item.lastName}`,
+                    value: item.userId
+                }));
+            }
+            if (modules.payload) {
+                formValues[11].options = modules.payload.map((item) => ({
+                    label: item.cmm,
+                    value: item.id
                 }));
             }
             setLoading(false);
@@ -73,7 +88,7 @@ const AssemblyManuelPage = () => {
     const deleteData = async (id) => {
         try {
             setLoading(true);
-            await dispatch(fetchAssemblyManualDelete({ id: id }));
+            await dispatch(fetchCMMDelete({ id: id }));
             await getData();
             setSuccess(t('delete_success'));
             setTimeout(() => setSuccess(null), 5000);
@@ -87,22 +102,25 @@ const AssemblyManuelPage = () => {
     const findData = async () => {
         if (selectedItem) {
             setLoading(true);
-            const data = await dispatch(fetchAssemblyManualGet({ id: selectedItem }));
+            const data = await dispatch(fetchCMMGet({ id: selectedItem }));
             if (data.payload) {
                 setFormData({
                     id: data.payload.id,
                     file: data.payload.file,
-                    projectName: data.payload.projectName,
-                    partCode: data.payload.partCode,
+                    resultFile: data.payload.resultFile,
+                    ProjectName: data.payload.projectName,
+                    PartCode: data.payload.partCode,
+                    Stand: data.payload.stand,
+                    Time: data.payload.time,
+                    Date: data.payload.date,
+                    InstallResultDate: data.payload.installResultDate,
+                    SolidModel: data.payload.solidModel,
+                    Description: data.payload.description,
+                    MeasuringPersonID: data.payload.measuringPersonID,
+                    CMMModuleID: data.payload.cmmModuleID,
                     responibleID: data.payload.responibleID,
-                    personInChargeID: data.payload.personInChargeID,
-                    qualityOfficerID: data.payload.qualityOfficerID,
-                    serialNumber: data.payload.serialNumber,
-                    productionQuantity: data.payload.productionQuantity,
-                    time: data.payload.time,
-                    date: data.payload.date,
-                    technicianDate: data.payload.technicianDate,
-                    description: data.payload.description
+                    PersonInChargeID: data.payload.personInChargeID,
+                    QualityOfficerID: data.payload.qualityOfficerID,
                 });
             }
             setLoading(false);
@@ -115,13 +133,13 @@ const AssemblyManuelPage = () => {
         try {
             if (!selectedItem) {
                 setLoading(true);
-                await dispatch(fetchAssemblyManualCreate({ formData: formData }));
+                await dispatch(fetchCMMCreate({ formData: formData }));
                 await getData();
                 setSuccess(t('add_success'));
                 setTimeout(() => setSuccess(null), 5000);
             } else {
                 setLoading(true);
-                await dispatch(fetchAssemblyManualUpdate({ formData: formData, id: selectedItem }));
+                await dispatch(fetchCMMUpdate({ formData: formData, id: selectedItem }));
                 await getData();
                 setSuccess(t('update_success'));
                 setTimeout(() => setSuccess(null), 5000);
@@ -136,8 +154,8 @@ const AssemblyManuelPage = () => {
         setFormData({ id: 0, file: [] });
     }
 
-    const selectedItemData = async () => { 
-        await dispatch(fetchAssemblyManualGet({ id: selectedItem }));
+    const selectedItemData = async () => {
+        await dispatch(fetchCMMGet({ id: selectedItem }));
     }
 
     useEffect(() => { getData(); }, [dispatch]);
@@ -148,8 +166,8 @@ const AssemblyManuelPage = () => {
             <Banner
                 modal={modal}
                 setModal={setModal}
-                title={t('assembly_manuals')}
-                description={t('assembly_manuals_description')}
+                title={t('cmm')}
+                description={t('cmm_desc')}
             />
 
             <Alerts
@@ -158,7 +176,7 @@ const AssemblyManuelPage = () => {
             />
 
             <ERPTable
-                data={assemblyManuals}
+                data={cmms}
                 columns={columns({
                     t: t,
                     setSelectedItem: setSelectedItem,
@@ -180,13 +198,13 @@ const AssemblyManuelPage = () => {
                 formValues={formValues}
             />
 
-            <AssemblyManualView
+            <CMMView
                 viewModal={viewModal}
                 setViewModal={setViewModal}
-                data={assemblyManuals?.find((item) => item.id === selectedItem)}
+                data={cmms?.find((item) => item.id === selectedItem)}
             />
         </ERP>
     );
 };
 
-export default AssemblyManuelPage;
+export default CMMPage;

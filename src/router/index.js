@@ -22,6 +22,11 @@ import AssemblyQualityManualPage from '../pages/assembly-quality/manual';
 import TechnicalDrawingQualityPage from '../pages/technical-drawing-quality';
 import TechnicalDrawingQualityDrawingPage from '../pages/technical-drawing-quality/manual';
 import RolePage from '../pages/role';
+import CMMPage from '../pages/cmm';
+import CMMModulePage from '../pages/cmm/cmm-module';
+import CMMSuccessPage from '../pages/cmm/cmm-success';
+import CMMNotePage from '../pages/cmm/cmm-note';
+import CMMFailurePage from '../pages/cmm/cmm-failure';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -47,6 +52,11 @@ const AnimatedRoutes = () => {
                 <Route path='/assembly-failure/:id' element={isAuth ? <AssemblyFailurePage /> : <LoginPage />} />
                 <Route path='/assembly-manual/quality' element={isAuth ? <AssemblyQualityPage /> : <LoginPage />} />
                 <Route path='/assembly-manual/quality/:id' element={isAuth ? <AssemblyQualityManualPage /> : <LoginPage />} />
+                <Route path='/cmm' element={isAuth ? <CMMPage /> : <LoginPage />} />
+                <Route path='/cmm-list' element={isAuth ? <CMMModulePage /> : <LoginPage />} />
+                <Route path='/cmm-success/:id' element={isAuth ? <CMMSuccessPage /> : <LoginPage />} />
+                <Route path='/cmm-note/:id' element={isAuth ? <CMMNotePage /> : <LoginPage />} />
+                <Route path='/cmm-failure/:id' element={isAuth ? <CMMFailurePage /> : <LoginPage />} />
                 <Route path='/department' element={isAuth ? <DepartmentPage /> : <LoginPage />} />
                 <Route path='/user' element={isAuth ? <UserPage /> : <LoginPage />} />
                 <Route path='/login' element={isAuth ? <HomePage /> : <LoginPage />} />
