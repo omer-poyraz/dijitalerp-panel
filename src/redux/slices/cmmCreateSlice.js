@@ -26,7 +26,7 @@ export const fetchCMMCreate = createAsyncThunk(
         data.append("SolidModel", formData.SolidModel)
         data.append("Description", formData.Description)
         data.append("MeasuringPersonID", formData.MeasuringPersonID)
-        data.append("CMMModuleID", formData.CMMModuleID)
+        data.append("CMMUserID", formData.CMMUserID)
         data.append("ResponibleID", formData.ResponibleID)
         data.append("PersonInChargeID", formData.PersonInChargeID)
         data.append("QualityOfficerID", formData.QualityOfficerID)

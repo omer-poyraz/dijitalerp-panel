@@ -140,10 +140,10 @@
     "employee_management": "Employee Management",
     "employee_management_desc": "Manage your employees and their roles",
     "employee": "Employee",
+    "install_result_date": "Installation Result Date",
+    "measuring_person": "Measuring Person",
     "cmm": "CMM",
     "cmm_desc": "Manage and monitor CMM operations here.",
     "cmm_list": "CMM List",
-    "install_result_date": "Installation Result Date",
-    "measuring_person": "Measuring Person",
-    "cmm_module": "CMM Module"
+    "cmm_personel": "CMM Personel"
 }

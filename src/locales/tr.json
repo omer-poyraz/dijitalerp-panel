@@ -140,10 +140,10 @@
     "employee_management": "Personel Yönetimi",
     "employee_management_desc": "Personel yönetimi ve izleme işlemlerini buradan yapabilirsiniz.",
     "employee": "Personel",
+    "install_result_date": "Kurulum Sonuç Tarihi",
+    "measuring_person": "Ölçüm Yapan Kişi",
     "cmm": "CMM",
     "cmm_desc": "CMM yönetimi ve izleme işlemlerini buradan yapabilirsiniz.",
     "cmm_list": "CMM Listesi",
-    "install_result_date": "Kurulum Sonuç Tarihi",
-    "measuring_person": "Ölçüm Yapan Kişi",
-    "cmm_module": "CMM Modül"
+    "cmm_personel": "CMM Personel"
 }

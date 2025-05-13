@@ -88,10 +88,6 @@ const Header = () => {
                 {
                     path: "/cmm",
                     label: t("cmm"),
-                    hasSubmenu: true,
-                    submenuItems: [
-                        { path: "/cmm-list", label: t("cmm_list") },
-                    ]
                 },
             ]
         },

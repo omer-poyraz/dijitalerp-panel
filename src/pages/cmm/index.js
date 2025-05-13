@@ -15,7 +15,6 @@ import { fetchCMMUpdate } from '../../redux/slices/cmmUpdateSlice';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserGetAll } from '../../redux/slices/userGetAllSlice';
 import CMMView from './view';
-import { fetchCMMModuleGetAll } from '../../redux/slices/cmmModuleGetAllSlice';
 
 const CMMPage = () => {
     const { t } = useTranslation();
@@ -39,10 +38,10 @@ const CMMPage = () => {
         { label: t("solid_model"), col: 6, key: "SolidModel", type: "text" },
         { label: t("description"), col: 6, key: "Description", type: "text" },
         { label: t("measuring_person"), col: 4, key: "MeasuringPersonID", type: "select" },
-        { label: t("cmm_module"), col: 4, key: "CMMModuleID", type: "select" },
+        { label: t("cmm_personel"), col: 4, key: "CMMUserID", type: "select" },
         { label: t("responible"), col: 4, key: "ResponibleID", type: "select", },
         { label: t("person_in_charge"), col: 4, key: "PersonInChargeID", type: "select", },
-        { label: t("quality_officer"), col: 6, key: "QualityOfficerID", type: "select" },
+        { label: t("quality_officer"), col: 8, key: "QualityOfficerID", type: "select" },
     ]);
     const cmms = useSelector((state) => state.cmmGetAll.data);
     const navigation = useNavigate()
@@ -52,9 +51,12 @@ const CMMPage = () => {
             setLoading(true);
             await dispatch(fetchCMMGetAll());
             var data = await dispatch(fetchUserGetAll({ search: "", pageNumber: 1, pageSize: 100 }));
-            var modules = await dispatch(fetchCMMModuleGetAll())
             if (data.payload) {
                 formValues[10].options = data.payload.map((item) => ({
+                    label: `${item.firstName} ${item.lastName}`,
+                    value: item.userId
+                }));
+                formValues[11].options = data.payload.map((item) => ({
                     label: `${item.firstName} ${item.lastName}`,
                     value: item.userId
                 }));
@@ -69,12 +71,6 @@ const CMMPage = () => {
                 formValues[14].options = data.payload.map((item) => ({
                     label: `${item.firstName} ${item.lastName}`,
                     value: item.userId
-                }));
-            }
-            if (modules.payload) {
-                formValues[11].options = modules.payload.map((item) => ({
-                    label: item.cmm,
-                    value: item.id
                 }));
             }
             setLoading(false);
@@ -117,8 +113,8 @@ const CMMPage = () => {
                     SolidModel: data.payload.solidModel,
                     Description: data.payload.description,
                     MeasuringPersonID: data.payload.measuringPersonID,
-                    CMMModuleID: data.payload.cmmModuleID,
-                    responibleID: data.payload.responibleID,
+                    CMMUserID: data.payload.cmmUserID,
+                    ResponibleID: data.payload.responibleID,
                     PersonInChargeID: data.payload.personInChargeID,
                     QualityOfficerID: data.payload.qualityOfficerID,
                 });
