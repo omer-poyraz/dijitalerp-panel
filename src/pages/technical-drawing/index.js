@@ -31,9 +31,10 @@ const TechnicalDrawingPage = () => {
         { label: t("project_name"), col: 6, key: "projectName", type: "text" },
         { label: t("part_code"), col: 6, key: "partCode", type: "text" },
         { label: t("serial_number"), col: 6, key: "serialNumber", type: "text" },
-        { label: t("responible"), col: 4, key: "responibleID", type: "select", },
-        { label: t("person_in_charge"), col: 4, key: "personInChargeID", type: "select" },
-        { label: t("quality_officer"), col: 4, key: "qualityOfficerID", type: "select" },
+        { label: t("responible"), col: 6, key: "responibleID", type: "select", },
+        { label: t("person_in_charge"), col: 6, key: "personInChargeID", type: "select" },
+        { label: t("quality_officer"), col: 6, key: "qualityOfficerID", type: "select" },
+        { label: t("cmm_personel"), col: 6, key: "cmmUserID", type: "select" },
         { label: t("production_quantity"), col: 6, key: "productionQuantity", type: "number" },
         { label: t("time"), col: 6, key: "time", type: "number" },
         { label: t("date"), col: 6, key: "date", type: "date" },
@@ -58,6 +59,10 @@ const TechnicalDrawingPage = () => {
                     value: item.userId
                 }));
                 formValues[6].options = data.payload.map((item) => ({
+                    label: `${item.firstName} ${item.lastName}`,
+                    value: item.userId
+                }));
+                formValues[7].options = data.payload.map((item) => ({
                     label: `${item.firstName} ${item.lastName}`,
                     value: item.userId
                 }));
@@ -97,6 +102,7 @@ const TechnicalDrawingPage = () => {
                     responibleID: data.payload.responibleID,
                     personInChargeID: data.payload.personInChargeID,
                     qualityOfficerID: data.payload.qualityOfficerID,
+                    cmmUserID: data.payload.cmmUserID,
                     serialNumber: data.payload.serialNumber,
                     productionQuantity: data.payload.productionQuantity,
                     time: data.payload.time,
