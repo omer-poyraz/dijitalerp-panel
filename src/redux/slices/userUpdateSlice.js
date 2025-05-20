@@ -19,7 +19,7 @@ export const fetchUserUpdate = createAsyncThunk(
         data.append("Field", Field);
         if (DepartmentID !== null) data.append("DepartmentID", DepartmentID);
         data.append("Title", Title || "");
-        data.append("Birthday", Birthday);
+        data.append("Birthday", new Date(Birthday).toISOString());
         data.append("StartDate", StartDate);
         data.append("DepartureDate", DepartureDate);
         data.append("Gender", Gender || "Erkek");

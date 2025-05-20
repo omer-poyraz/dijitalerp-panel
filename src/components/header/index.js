@@ -13,6 +13,7 @@ const Header = () => {
     const [scrolled, setScrolled] = useState(false);
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
     const [openSubMenuIndex, setOpenSubMenuIndex] = useState(null);
+    const [openMenuPath, setOpenMenuPath] = useState([]);
     const [openNestedSubMenuIndex, setOpenNestedSubMenuIndex] = useState({});
     const location = useLocation();
     const navigate = useNavigate();
@@ -85,16 +86,12 @@ const Header = () => {
                 { path: "/assembly-manual", label: t("assembly_manual"), },
                 { path: "/technical-drawing", label: t("technical_drawing"), },
                 { path: "/department", label: t("department") },
-                {
-                    path: "/cmm",
-                    label: t("cmm"),
-                },
             ]
         },
         { path: "/product", label: t("product") },
         { path: "/customers", label: t("customers") },
         {
-            path: "/user",
+            path: "#",
             label: t("employee"),
             hasSubmenu: true,
             submenuItems: [
@@ -119,11 +116,7 @@ const Header = () => {
                     }}
                     style={{ position: 'relative' }}
                 >
-                    <Link
-                        to={item.path}
-                        onClick={closeMenu}
-                        style={{ width: '100%' }}
-                    >
+                    <Link to={item.path} onClick={closeMenu} style={{ width: '100%' }}>
                         <span>{item.label}</span>
                     </Link>
                     {item.hasSubmenu && <div><BiChevronRight size={20} /></div>}

@@ -107,7 +107,7 @@ const AssemblyFailurePage = () => {
     }
 
     useEffect(() => { getData() }, [dispatch])
-    useEffect(() => { findData() }, [selectedItem])
+    useEffect(() => { findData() }, [selectedItem, dispatch])
 
     return (
         <ERP>

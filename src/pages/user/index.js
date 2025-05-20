@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ERP from '../../components/general/ERP'
 import Banner from '../../components/page/Banner'
 import { useTranslation } from 'react-i18next'
@@ -13,6 +13,7 @@ import { fetchUserUpdate } from '../../redux/slices/userUpdateSlice'
 import { fetchUserCreate } from '../../redux/slices/userCreateSlice'
 import { fetchUserGet } from '../../redux/slices/userGetSlice'
 import { fetchDepartmentGetAll } from '../../redux/slices/departmentGetAllSlice'
+import { Roles } from '../../utilities/data/roles'
 
 const UserPage = () => {
     const { t } = useTranslation()
@@ -25,18 +26,20 @@ const UserPage = () => {
     const [pageSize, setPageSize] = useState(10)
     const [formData, setFormData] = useState({ file: null });
     const [formValues] = useState([
-        { label: t("image"), col: 6, key: "file", type: "file" },
-        { label: t("name"), col: 6, key: "firstName", type: "text" },
-        { label: t("surname"), col: 6, key: "lastName", type: "text" },
+        { label: t("image"), col: 4, key: "file", type: "file" },
+        { label: t("name"), col: 4, key: "firstName", type: "text" },
+        { label: t("surname"), col: 4, key: "lastName", type: "text" },
         { label: t("department"), col: 6, key: "department", type: "select" },
         { label: t("username"), col: 6, key: "userName", type: "text" },
         { label: t("TC NO"), col: 6, key: "tckno", type: "text" },
         { label: t("email"), col: 6, key: "email", type: "text" },
+        { label: t("password"), col: 6, key: "password", type: "text" },
         { label: t("phone"), col: 6, key: "phoneNumber", type: "text" },
         { label: `${t("phone")} 2`, col: 6, key: "phoneNumber2", type: "text" },
         { label: t("field"), col: 6, key: "field", type: "text" },
-        { label: t("birthday"), col: 6, key: "birthday", type: "date" },
-        { label: t("startday"), col: 6, key: "startDate", type: "date" },
+        { label: t("birthday"), col: 4, key: "birthday", type: "date" },
+        { label: t("startday"), col: 4, key: "startDate", type: "date" },
+        { label: t("role"), col: 4, key: "role", type: "select" },
         { label: t("address"), col: 12, key: "address", type: "textarea" },
     ]);
     const users = useSelector((state) => state.userGetAll.data)
@@ -52,6 +55,10 @@ const UserPage = () => {
                 value: item.id
             }));
         }
+        formValues[13].options = Roles.map((item) => ({
+            label: item.label,
+            value: item.value
+        }));
         setLoading(false)
     }
 
@@ -75,7 +82,7 @@ const UserPage = () => {
                     LastName: formData.lastName,
                     UserName: formData.userName,
                     Email: formData.email,
-                    tckno: formData.tckno,
+                    TCKNO: formData.tckno,
                     PhoneNumber: formData.phoneNumber,
                     PhoneNumber2: formData.phoneNumber2,
                     Address: formData.address,
@@ -99,7 +106,7 @@ const UserPage = () => {
                     LastName: formData.lastName,
                     UserName: formData.userName,
                     Email: formData.email,
-                    tckno: formData.tckno,
+                    TCKNO: formData.tckno,
                     PhoneNumber: formData.phoneNumber,
                     PhoneNumber2: formData.phoneNumber2,
                     Address: formData.address,
@@ -108,9 +115,11 @@ const UserPage = () => {
                     Title: formData.title,
                     Birthday: formData.birthday,
                     StartDate: formData.startDate,
+                    Password: formData.password,
                     DepartureDate: new Date().toISOString(),
                     Gender: null,
-                    IsActive: true
+                    IsActive: true,
+                    Roles: formData.role
                 }))
                 await getData()
                 setSuccess(t('create_success'))
@@ -152,7 +161,7 @@ const UserPage = () => {
     }
 
     useEffect(() => { getData() }, [dispatch])
-    useEffect(() => { findData() }, [selectedItem])
+    useEffect(() => { findData() }, [selectedItem, dispatch])
 
     return (
         <ERP>

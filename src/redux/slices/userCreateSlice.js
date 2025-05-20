@@ -7,22 +7,22 @@ export const fetchUserCreate = createAsyncThunk(
         var roles = []
         roles.push(Roles)
         const formData = new FormData();
-        if (file) formData.append("file", file);
+        if (file) formData.append("file", file[0]);
         formData.append("FirstName", FirstName);
         formData.append("LastName", LastName);
         formData.append("UserName", UserName);
         formData.append("Email", Email);
-        formData.append("Password", Password);
+        formData.append("Password", Password || "DijitalErp123.");
         formData.append("TCKNO", TCKNO);
         formData.append("Field", Field);
         formData.append("PhoneNumber2", PhoneNumber2);
-        formData.append("DepartmentID", DepartmentID);
-        formData.append("Title", Title);
-        formData.append("StartDate", StartDate);
-        formData.append("DepartureDate", DepartureDate);
-        formData.append("Gender", Gender);
-        formData.append("IsActive", IsActive);
-        formData.append("Roles", roles);
+        if (DepartmentID !== null) formData.append("DepartmentID", DepartmentID);
+        formData.append("Title", Title || "");
+        formData.append("StartDate", new Date(StartDate).toISOString());
+        formData.append("DepartureDate", new Date(DepartureDate).toISOString());
+        formData.append("Gender", Gender || "Erkek");
+        formData.append("IsActive", IsActive || true);
+        formData.append("Roles", roles || ["Personel"]);
 
         const response = await UserCreate(formData)
         return response.result
